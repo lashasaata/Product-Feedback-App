@@ -5,7 +5,9 @@ export default function FeedBackCardSpace({ productRequests }) {
   return (
     <FeedbackSpace>
       {productRequests.map((feedback) => {
-        return <FeedbackCard key={feedback.id} feedback={feedback} />;
+        if (feedback.status !== "suggestion") {
+          return <FeedbackCard key={feedback.id} feedback={feedback} />;
+        }
       })}
     </FeedbackSpace>
   );
