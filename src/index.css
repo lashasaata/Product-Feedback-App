@@ -16,3 +16,8 @@ span {
   font-family: "Jost", sans-serif;
   box-sizing: border-box;
 }
+
+body {
+  background: rgba(247, 248, 253, 1);
+  height: 100dvh;
+}

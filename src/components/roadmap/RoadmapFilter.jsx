@@ -6,19 +6,23 @@ export default function RoadMapFilter({ productRequests, setSelectedFilter }) {
       .length;
   };
 
+  const handleFilterClick = (status) => {
+    setSelectedFilter((prevFilter) => (prevFilter === status ? "all" : status));
+  };
+
   return (
     <FilterContainer>
       <span
         className="status-filter"
-        onClick={() => setSelectedFilter("planned")}>
+        onClick={() => handleFilterClick("planned")}>
         Planned ({getCountByStatus("planned")})
       </span>
       <span
         className="status-filter"
-        onClick={() => setSelectedFilter("in-progress")}>
+        onClick={() => handleFilterClick("in-progress")}>
         In-Progress ({getCountByStatus("in-progress")})
       </span>
-      <span className="status-filter" onClick={() => setSelectedFilter("live")}>
+      <span className="status-filter" onClick={() => handleFilterClick("live")}>
         Live ({getCountByStatus("live")})
       </span>
     </FilterContainer>

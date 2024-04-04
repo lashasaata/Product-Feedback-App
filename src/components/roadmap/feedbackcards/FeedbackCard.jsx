@@ -1,14 +1,15 @@
 import styled from "styled-components";
 
-export default function FeedbackCard({ feedback }) {
+export default function FeedbackCard({ feedback, selectedFilter }) {
   //   console.log(feedback);
+  // ?????????????????????? cconsole.log(selectedFilter); ??????? FIX
 
   const commentCount = Array.isArray(feedback.comments)
     ? feedback.comments.length
     : 0;
 
   return (
-    <SingleCard>
+    <SingleCard feedback={feedback}>
       <div className="status-container">
         <div className="status-circle"></div>
         <span className="card-status">{feedback.status}</span>
@@ -32,7 +33,15 @@ export default function FeedbackCard({ feedback }) {
 
 const SingleCard = styled.div`
   background: rgba(255, 255, 255, 1);
-  border-top: 6px solid rgba(173, 31, 234, 1);
+  border-top: ${(props) =>
+    props.feedback.status === "in-progress"
+      ? "6px solid rgba(173, 31, 234, 1)"
+      : props.feedback.status === "planned"
+      ? "6px solid rgba(244, 159, 133, 1)"
+      : props.feedback.status === "live"
+      ? "6px solid rgba(98, 188, 250, 1)"
+      : ""};
+
   border-radius: 5px;
   padding: 16px 24px 24px;
   font-size: 13px;

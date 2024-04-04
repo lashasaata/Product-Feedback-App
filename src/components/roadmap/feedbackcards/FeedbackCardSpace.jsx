@@ -9,14 +9,17 @@ export default function FeedBackCardSpace({ productRequests, selectedFilter }) {
           (feedback) => feedback.status === selectedFilter
         );
 
-  // console.log(filteredProductRequests);
-  console.log(selectedFilter);
-  // console.log(productRequests);
   return (
     <FeedbackSpace>
       {filteredProductRequests.map((feedback) => {
         if (feedback.status !== "suggestion") {
-          return <FeedbackCard key={feedback.id} feedback={feedback} />;
+          return (
+            <FeedbackCard
+              selectedFilter={selectedFilter}
+              key={feedback.id}
+              feedback={feedback}
+            />
+          );
         }
       })}
     </FeedbackSpace>
@@ -25,7 +28,7 @@ export default function FeedBackCardSpace({ productRequests, selectedFilter }) {
 
 const FeedbackSpace = styled.main`
   background: rgba(247, 248, 253, 1);
-  height: 100%;
+  height: fit-content;
   padding: 24px;
   display: flex;
   flex-direction: column;
