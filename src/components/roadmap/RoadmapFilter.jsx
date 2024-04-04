@@ -1,20 +1,13 @@
 import styled from "styled-components";
 
 export default function RoadMapFilter({
-  productRequests,
   setSelectedFilter,
   selectedFilter,
+  getCountByStatus,
 }) {
-  const getCountByStatus = (statusName) => {
-    return productRequests.filter((request) => request.status === statusName)
-      .length;
-  };
-
   const handleFilterClick = (status) => {
     setSelectedFilter((prevFilter) => (prevFilter === status ? "all" : status));
   };
-  const displayFilter =
-    selectedFilter.charAt(0).toUpperCase() + selectedFilter.slice(1);
 
   return (
     <>
@@ -41,7 +34,7 @@ export default function RoadMapFilter({
           Live ({getCountByStatus("live")})
         </FilterStatus>
       </FilterContainer>
-
+      {/* 
       {selectedFilter === "all" ? (
         ""
       ) : (
@@ -57,7 +50,7 @@ export default function RoadMapFilter({
 
           <p>Features currently being developed</p>
         </StatusInfoTitle>
-      )}
+      )} */}
     </>
   );
 }
@@ -92,26 +85,4 @@ const FilterStatus = styled.span`
         ? "4px solid rgba(98, 188, 250, 1)"
         : ""
       : ""};
-`;
-
-const StatusInfoTitle = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 24px 24px 0px;
-
-  & h2 {
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 26.01px;
-    letter-spacing: -0.25px;
-    color: rgba(58, 67, 116, 1);
-  }
-
-  & p {
-    font-size: 13px;
-    font-weight: 400;
-    line-height: 18.79px;
-    color: rgba(100, 113, 150, 1);
-  }
 `;
