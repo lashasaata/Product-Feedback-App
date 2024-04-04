@@ -60,7 +60,7 @@ const FeedbackSpace = styled.main`
   padding: 24px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 24px;
 `;
 
 const StatusInfoTitle = styled.div`
@@ -68,6 +68,11 @@ const StatusInfoTitle = styled.div`
   flex-direction: column;
   gap: 6px;
   padding: 0px 24px 0px;
+  margin: auto;
+  position: relative;
+  left: -60px;
+  /* text-align: left;
+  align-self: flex-start; */
 
   & h2 {
     font-size: 18px;
