@@ -1,7 +1,10 @@
 import "./App.css";
+import Feedbacks from "./components/Feedbacks";
 
 function App() {
-  return <></>;
+  return <>
+    <Feedbacks/>
+  </>;
 }
 
 export default App;
