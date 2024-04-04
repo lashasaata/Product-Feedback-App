@@ -19,11 +19,11 @@ export default function FeedbackCard({ data }) {
           <img src="/assets/shared/icon-arrow-up.svg" alt="icon of arrow up" />
           <span className="upvote-count">62</span>
         </UpvoteBox>
+        <CommentContainer>
+          <img src="/assets/shared/icon-comments.svg" alt="comment icon" />
+          <span className="comment-count">1</span>
+        </CommentContainer>
       </div>
-      <CommentContainer>
-        <img src="/assets/shared/icon-comments.svg" alt="comment icon" />
-        <span className="comment-count">1</span>
-      </CommentContainer>
     </SingleCard>
   );
 }
@@ -35,6 +35,7 @@ const SingleCard = styled.div`
   padding: 16px 24px 24px;
   font-size: 13px;
   line-height: 18.79px;
+  width: 327px;
 
   & .status-container {
     display: flex;
@@ -62,10 +63,17 @@ const SingleCard = styled.div`
     margin-top: 16px;
   }
 
-  .feedback-text {
+  & .feedback-text {
     font-weight: 400;
     color: rgba(100, 113, 150, 1);
     margin-top: 9px;
+  }
+
+  & .upvote-comment-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
   }
 `;
 
@@ -87,7 +95,6 @@ const UpvoteBox = styled.div`
   padding: 7px 13px;
   width: 69px;
   border-radius: 10px;
-  margin-top: 16px;
 
   & .upvote-count {
     color: rgba(58, 67, 116, 1);
@@ -96,4 +103,8 @@ const UpvoteBox = styled.div`
   }
 `;
 
-const CommentContainer = styled.div``;
+const CommentContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 4px;
+`;
