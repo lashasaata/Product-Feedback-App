@@ -7,17 +7,21 @@ import FeedBackCardSpace from "./feedbackcards/FeedbackCardSpace";
 
 export default function RoadMap() {
   const [data, setData] = useState(dataJson);
+  const [selectedFilter, setSelectedFilter] = useState("all");
   const { productRequests } = data;
 
   return (
     <>
       <Header />
       <RoadMapFilter
+        setSelectedFilter={setSelectedFilter}
+        productRequests={productRequests}
+      />
+      <FeedBackCardSpace
+        selectedFilter={selectedFilter}
         productRequests={productRequests}
         data={data}
-        setData={setData}
       />
-      <FeedBackCardSpace productRequests={productRequests} data={data} />
     </>
   );
 }

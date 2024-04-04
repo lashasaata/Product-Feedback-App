@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export default function RoadMapFilter({ productRequests }) {
+export default function RoadMapFilter({ productRequests, setSelectedFilter }) {
   const getCountByStatus = (statusName) => {
     return productRequests.filter((request) => request.status === statusName)
       .length;
@@ -8,13 +8,19 @@ export default function RoadMapFilter({ productRequests }) {
 
   return (
     <FilterContainer>
-      <span className="status-filter">
+      <span
+        className="status-filter"
+        onClick={() => setSelectedFilter("planned")}>
         Planned ({getCountByStatus("planned")})
       </span>
-      <span className="status-filter">
+      <span
+        className="status-filter"
+        onClick={() => setSelectedFilter("in-progress")}>
         In-Progress ({getCountByStatus("in-progress")})
       </span>
-      <span className="status-filter">Live ({getCountByStatus("live")})</span>
+      <span className="status-filter" onClick={() => setSelectedFilter("live")}>
+        Live ({getCountByStatus("live")})
+      </span>
     </FilterContainer>
   );
 }
