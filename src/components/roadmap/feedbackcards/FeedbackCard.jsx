@@ -109,4 +109,10 @@ const CommentContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 4px;
+
+  & .comment-count {
+    font-weight: 700;
+    line-height: 18.79px;
+    color: rgba(58, 67, 116, 1);
+  }
 `;
