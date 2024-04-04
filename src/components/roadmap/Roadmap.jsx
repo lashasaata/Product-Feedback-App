@@ -1,13 +1,17 @@
 import styled from "styled-components";
-import data from "../../data.json";
+import dataJson from "../../data.json";
 import Header from "./Header";
 import RoadMapFilter from "./RoadmapFilter";
+import { useState } from "react";
 
 export default function RoadMap() {
+  const [data, setData] = useState(dataJson);
+  // console.log(data.currentUser);
+
   return (
     <>
       <Header />
-      <RoadMapFilter />
+      <RoadMapFilter data={data} setData={setData} />
     </>
   );
 }

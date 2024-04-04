@@ -35,6 +35,10 @@ const HeaderFlexGroup = styled.div`
     & .go-back {
       font-size: 13px;
       line-height: 18.79px;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 
@@ -55,4 +59,8 @@ const AddFeedBackButton = styled.button`
   border: none;
   border-radius: 10px;
   padding: 10.5px 17px;
+
+  &:hover {
+    background: rgba(199, 90, 246, 1);
+  }
 `;
