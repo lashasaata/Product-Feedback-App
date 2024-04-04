@@ -1,27 +1,29 @@
 import styled from "styled-components";
 
-export default function FeedbackCard({ data }) {
-  const { productRequests } = data;
+export default function FeedbackCard({ feedback }) {
+  //   console.log(feedback);
+
+  const commentCount = Array.isArray(feedback.comments)
+    ? feedback.comments.length
+    : 0;
 
   return (
     <SingleCard>
       <div className="status-container">
         <div className="status-circle"></div>
-        <span className="card-status">In Progress</span>
+        <span className="card-status">{feedback.status}</span>
       </div>
-      <h3 className="feedback-title">One-click portfolio generation</h3>
-      <p className="feedback-text">
-        Add ability to create professional looking portfolio from profile.
-      </p>
-      <FeatureIcon>Feature</FeatureIcon>
+      <h3 className="feedback-title">{feedback.title}</h3>
+      <p className="feedback-text">{feedback.description}</p>
+      <FeatureIcon>{feedback.category}</FeatureIcon>
       <div className="upvote-comment-container">
         <UpvoteBox>
           <img src="/assets/shared/icon-arrow-up.svg" alt="icon of arrow up" />
-          <span className="upvote-count">62</span>
+          <span className="upvote-count">{feedback.upvotes}</span>
         </UpvoteBox>
         <CommentContainer>
           <img src="/assets/shared/icon-comments.svg" alt="comment icon" />
-          <span className="comment-count">1</span>
+          <span className="comment-count">{commentCount}</span>
         </CommentContainer>
       </div>
     </SingleCard>

@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import FeedbackCard from "./FeedbackCard";
 
-export default function FeedBackCardSpace({ data }) {
+export default function FeedBackCardSpace({ productRequests }) {
   return (
     <FeedbackSpace>
-      <FeedbackCard data={data} />
-      <FeedbackCard data={data} />
+      {productRequests.map((feedback) => {
+        return <FeedbackCard key={feedback.id} feedback={feedback} />;
+      })}
     </FeedbackSpace>
   );
 }

@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
-export default function RoadMapFilter({ data, setData }) {
-  const { productRequests } = data;
-
+export default function RoadMapFilter({ productRequests }) {
   const getCountByStatus = (statusName) => {
     return productRequests.filter((request) => request.status === statusName)
       .length;
