@@ -13,13 +13,7 @@ export default function FeedBackCardSpace({ productRequests, selectedFilter }) {
     <FeedbackSpace>
       {filteredProductRequests.map((feedback) => {
         if (feedback.status !== "suggestion") {
-          return (
-            <FeedbackCard
-              selectedFilter={selectedFilter}
-              key={feedback.id}
-              feedback={feedback}
-            />
-          );
+          return <FeedbackCard key={feedback.id} feedback={feedback} />;
         }
       })}
     </FeedbackSpace>

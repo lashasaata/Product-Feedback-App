@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export default function FeedbackCard({ feedback, selectedFilter }) {
+export default function FeedbackCard({ feedback }) {
   //   console.log(feedback);
   // ?????????????????????? cconsole.log(selectedFilter); ??????? FIX
 
@@ -62,7 +62,14 @@ const SingleCard = styled.div`
     & .status-circle {
       height: 8px;
       width: 9px;
-      background: rgba(173, 31, 234, 1);
+      background: ${(props) =>
+        props.feedback.status === "in-progress"
+          ? "rgba(173, 31, 234, 1)"
+          : props.feedback.status === "planned"
+          ? "rgba(244, 159, 133, 1)"
+          : props.feedback.status === "live"
+          ? "rgba(98, 188, 250, 1)"
+          : ""};
       border-radius: 50%;
     }
   }
@@ -117,7 +124,7 @@ const UpvoteBox = styled.div`
 const CommentContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
 
   & .comment-count {
     font-weight: 700;

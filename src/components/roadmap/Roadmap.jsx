@@ -14,6 +14,7 @@ export default function RoadMap() {
     <>
       <Header />
       <RoadMapFilter
+        selectedFilter={selectedFilter}
         setSelectedFilter={setSelectedFilter}
         productRequests={productRequests}
       />
