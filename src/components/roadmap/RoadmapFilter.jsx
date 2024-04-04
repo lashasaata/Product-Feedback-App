@@ -28,6 +28,7 @@ const FilterContainer = styled.div`
   padding: 20px 30px 16.5px 30px;
   font-weight: 700;
   color: rgba(58, 67, 116, 1);
+  background: rgba(247, 248, 253, 1);
 
   border-bottom: 1px solid rgba(140, 146, 179, 25%);
 

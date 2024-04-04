@@ -11,6 +11,8 @@
 
 body,
 button,
-form {
+form,
+span {
   font-family: "Jost", sans-serif;
+  box-sizing: border-box;
 }
