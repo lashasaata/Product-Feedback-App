@@ -8,6 +8,7 @@ import Empty from "/assets/suggestions/illustration-empty.svg";
 export default function Feedbacks({ data, setData }) {
     const [showSortOptions, setShowSortOptions] = useState(false);
     const [sortBy, setSortBy] = useState('mostUpvotes');
+    const [upvotedFeedbacks, setUpvotedFeedbacks] = useState([]);
 
     const seggestedFeedbacks = data.productRequests.filter(feedback => feedback.status === "suggestion");
 
@@ -31,6 +32,30 @@ export default function Feedbacks({ data, setData }) {
                 return (a.comments?.length ?? 0) - (b.comments?.length ?? 0);
         }
     });
+
+    const handleUpvote = (id) => {
+        if (!upvotedFeedbacks.includes(id)) {
+            setUpvotedFeedbacks([...upvotedFeedbacks, id]);
+            const updatedData = data.productRequests.map(feedback => {
+                if (feedback.id === id) {
+                    return { ...feedback, upvotes: feedback.upvotes + 1 };
+                }
+                return feedback;
+            });
+            setData({ ...data, productRequests: updatedData });
+        } else {
+            const updatedData = data.productRequests.map(feedback => {
+                if (feedback.id === id) {
+                    return { ...feedback, upvotes: feedback.upvotes - 1 };
+                }
+                return feedback;
+            });
+            setData({ ...data, productRequests: updatedData });
+            const filteredUpvotedFeedbacks = upvotedFeedbacks.filter(feedbackId => feedbackId !== id);
+            setUpvotedFeedbacks(filteredUpvotedFeedbacks);
+        }
+    };
+    
 
     return (
         <div className="feedbacks">
@@ -88,7 +113,7 @@ export default function Feedbacks({ data, setData }) {
                                 </div>
 
                                 <div className="flex justify-between">
-                                    <button className="flex gap-2 items-center rounded-lg bg-slate-100 py-1 px-4">
+                                    <button className="flex gap-2 items-center rounded-lg bg-slate-100 py-1 px-4"  onClick={() => handleUpvote(feedback.id)}>
                                         <img src={ArrowUp} alt="arrow up icon" />
                                         <p className="text-xs font-bold tracking-tighter text-blue-900">{feedback.upvotes}</p>
                                     </button>
