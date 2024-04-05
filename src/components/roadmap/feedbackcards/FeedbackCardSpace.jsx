@@ -5,6 +5,7 @@ export default function FeedBackCardSpace({
   productRequests,
   selectedFilter,
   getCountByStatus,
+  setData,
 }) {
   const filteredProductRequests =
     selectedFilter === "all"
@@ -38,7 +39,13 @@ export default function FeedBackCardSpace({
         <CardsContainer>
           {filteredProductRequests.map((feedback) => {
             if (feedback.status !== "suggestion") {
-              return <FeedbackCard key={feedback.id} feedback={feedback} />;
+              return (
+                <FeedbackCard
+                  key={feedback.id}
+                  feedback={feedback}
+                  setData={setData}
+                />
+              );
             }
           })}
         </CardsContainer>

@@ -1,12 +1,31 @@
 import styled from "styled-components";
 
-export default function FeedbackCard({ feedback }) {
+export default function FeedbackCard({ feedback, setData }) {
   //   console.log(feedback);
   // ?????????????????????? cconsole.log(selectedFilter); ??????? FIX
 
   const commentCount = Array.isArray(feedback.comments)
     ? feedback.comments.length
     : 0;
+
+  const hasUpvoted = feedback.hasUpvoted;
+
+  const onUpvoteClick = () => {
+    setData((prevData) => {
+      const newData = JSON.parse(JSON.stringify(prevData));
+      const feedbackItem = newData.productRequests.find(
+        (item) => item.id === feedback.id
+      );
+      if (hasUpvoted) {
+        feedbackItem.upvotes -= 1; // Downvote if already upvoted
+      } else {
+        feedbackItem.upvotes += 1; // Upvote if not yet upvoted
+      }
+      feedbackItem.hasUpvoted = !hasUpvoted;
+
+      return newData;
+    });
+  };
 
   return (
     <SingleCard feedback={feedback}>
@@ -18,7 +37,7 @@ export default function FeedbackCard({ feedback }) {
       <p className="feedback-text">{feedback.description}</p>
       <FeatureIcon>{feedback.category}</FeatureIcon>
       <div className="upvote-comment-container">
-        <UpvoteBox>
+        <UpvoteBox onClick={onUpvoteClick}>
           <img src="/assets/shared/icon-arrow-up.svg" alt="icon of arrow up" />
           <span className="upvote-count">{feedback.upvotes}</span>
         </UpvoteBox>
@@ -113,6 +132,11 @@ const UpvoteBox = styled.div`
   padding: 7px 13px;
   width: 69px;
   border-radius: 10px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(207, 215, 255, 1);
+  }
 
   & .upvote-count {
     color: rgba(58, 67, 116, 1);

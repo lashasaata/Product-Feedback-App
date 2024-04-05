@@ -28,6 +28,7 @@ export default function RoadMap() {
         selectedFilter={selectedFilter}
         productRequests={productRequests}
         data={data}
+        setData={setData}
       />
     </>
   );
