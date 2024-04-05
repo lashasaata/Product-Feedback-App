@@ -4,6 +4,8 @@ import Close from "/assets/shared/mobile/icon-close.svg";
 import ArrowDown from "/assets/shared/icon-arrow-down.svg";
 import ArrowUp from "/assets/shared/icon-arrow-up.svg";
 import Comments from "/assets/shared/icon-comments.svg";
+import SortOption from './SortOption';
+import Category from './Category';
 
 export default function Feedbacks({ data, setData }) {
     const [showSortOptions, setShowSortOptions] = useState(false);
@@ -112,10 +114,10 @@ export default function Feedbacks({ data, setData }) {
 
             {showSortOptions && (
                 <div className="absolute rounded-lg bg-white cursor-pointer" style={{ left: '58px', top: '112px', boxShadow: '0 10px 40px -7px rgba(55, 63, 104, 0.35)'  }}>
-                    <div className="text-xs text-blue-gray-600 border-b border-blue-gray-700 py-2 px-5" onClick={() => { sortFeedbacks('mostUpvotes'); setShowSortOptions(false); }}>Most Upvotes</div>
-                    <div className="text-xs text-blue-gray-600 border-b border-blue-gray-700 py-2 px-5" onClick={() => { sortFeedbacks('leastUpvotes'); setShowSortOptions(false); }}>Least Upvotes</div>
-                    <div className="text-xs text-blue-gray-600 border-b border-blue-gray-700 py-2 px-5" onClick={() => { sortFeedbacks('mostComments'); setShowSortOptions(false); }}>Most Comments</div>
-                    <div className="text-xs text-blue-gray-600 border-b border-blue-gray-700 py-2 px-5" onClick={() => { sortFeedbacks('leastComments'); setShowSortOptions(false); }}>Least Comments</div>
+                    <SortOption onClick={() => { sortFeedbacks('mostUpvotes'); setShowSortOptions(false); }} textContent={"Most Upvotes"}/>
+                    <SortOption onClick={() => { sortFeedbacks('leastUpvotes'); setShowSortOptions(false); }} textContent={"Least Upvotes"}/>
+                    <SortOption onClick={() => { sortFeedbacks('mostComments'); setShowSortOptions(false); }} textContent={"Most Comments"}/>
+                    <SortOption onClick={() => { sortFeedbacks('leastComments'); setShowSortOptions(false); }} textContent={"Least Comments"}/>
                 </div>
             )}
 
@@ -123,9 +125,7 @@ export default function Feedbacks({ data, setData }) {
                 <div className='bg-white rounded-lg flex flex-wrap gap-2 p-6'>
                     <button className="p-1.5 md:p-2.5 lg:p-3 rounded-lg bg-blue-100 text-blue-600 text-sm md:text-base font-semibold" onClick={() => handleCategoryClick(null)}>All</button>
                     {sortedFeedbacks.map((feedback)=>{
-                        return <button key={feedback.id} className="p-1.5 md:p-2.5 lg:p-3 rounded-lg bg-blue-100 text-blue-600 text-sm md:text-base font-semibold" onClick={() => handleCategoryClick(feedback.category)}>
-                            {feedback.category}
-                        </button>
+                        return <Category key={feedback.id} onClick={() => handleCategoryClick(feedback.category)} theCategory={feedback.category}/>
                     })}
                 </div>
 
