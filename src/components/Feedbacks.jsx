@@ -7,6 +7,7 @@ import SuggestionImg from "/assets/suggestions/icon-suggestions.svg"
 import SortOption from './SortOption';
 import Category from './Category';
 import Feedback from './Feedback';
+import EmptyFeedbacks from './EmptyFeedbacks';
 
 export default function Feedbacks({ data, setData }) {
     const [showSortOptions, setShowSortOptions] = useState(false);
@@ -94,7 +95,7 @@ export default function Feedbacks({ data, setData }) {
         <div className="md:bg-slate-100 md:px-[39px] md:py-[56px] md:flex md:flex-col md:gap-6">
             <header className='md:flex md:flex-col md:gap-[40px]'>
                 <div className="headerImg w-full flex justify-between items-center  py-4 px-6 md:bg-none  md:bg-slate-100">
-                    <div className="headerImg md:w-[223px] md:h-[178px] md:p-6 rounded-lg md:flex md:flex-col md:justify-end">
+                    <div className="titleBackground md:w-[223px] md:h-[178px] md:p-6 rounded-lg md:flex md:flex-col md:justify-end">
                         <p className="text-base font-bold tracking-tight text-white md:text-xl">Frontend Mentor</p>
                         <p className="text-xs font-medium text-white opacity-75 md:text-base">Feedback Board</p>
                     </div>
@@ -183,15 +184,18 @@ export default function Feedbacks({ data, setData }) {
                 </div>
            </div>
 
-            <main className="bg-slate-100 p-6 flex gap-4 flex-col md:p-0" style={{ opacity: opacity}}>
-                {sortedFeedbacks
-                    .filter(feedback => selectedCategory === null || feedback.category === selectedCategory)
-                    .map((feedback) => {
-                        return (
-                            <Feedback key={feedback.id} feedback={feedback} onClick={() => handleUpvote(feedback.id)}/>
-                        );
-                    })
-                }
+            <main className="bg-slate-100 p-6 flex gap-4 flex-col md:p-0" style={{ opacity: opacity }}>
+                {seggestedFeedbacks.length === 0 ? (
+                    <EmptyFeedbacks/>
+                ) : (
+                    sortedFeedbacks
+                        .filter(feedback => selectedCategory === null || feedback.category === selectedCategory)
+                        .map((feedback) => {
+                            return (
+                                <Feedback key={feedback.id} feedback={feedback} onClick={() => handleUpvote(feedback.id)}/>
+                            );
+                        })
+                )}
             </main>
         </div>
     );
