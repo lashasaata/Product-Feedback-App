@@ -4,3 +4,9 @@
   min-height: 100vh;
   font-family: "Jost";
 }
+
+.headerImg{
+  background-image: radial-gradient(circle at 104% -10%, #e84d70, #a337f6 54%, #28a7ed 103%);
+  background-size: cover;
+  background-position: center;
+}
