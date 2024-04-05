@@ -5,8 +5,8 @@ function Feedback() {
   const choosen = datajson.productRequests[1];
   // console.log(choosen);
   return (
-    <div className="bg-[#f7f8fd] flex flex-col items-center gap-6 mt-6">
-      <header className="w-[327px] flex items-center justify-between">
+    <div className="bg-[#f7f8fd] flex flex-col items-center gap-6">
+      <header className="w-[327px] flex items-center justify-between mt-6">
         <div className="flex items-center gap-[15.7px]">
           <img src="./assets/shared/icon-arrow-left.svg" alt="arrow_icon" />
           <span className="text-[13px] text-[#647196] font-[700]">Go Back</span>
@@ -19,7 +19,7 @@ function Feedback() {
         <h1 className="text-[13px] text-[#3a4374] tracking-[-0.18px] font-[700]">
           {choosen.title}
         </h1>
-        <p className="text-[13px] text-[#647196] font-[500] mt-[9px]">
+        <p className="text-[13px] text-[#647196] font-[400] mt-[9px]">
           {choosen.description}
         </p>
         <div className="w-[77px] h-[30px] bg-[#f2f4ff] flex items-center justify-center rounded-[10px] mt-[10px]">
@@ -40,6 +40,27 @@ function Feedback() {
               {choosen.comments.length}
             </span>
           </div>
+        </div>
+      </section>
+      <section className="w-[327px] bg-white rounded-[10px] p-6 mb-20">
+        <h1 className="text-lg text-[#3a4374] font-[700] tracking-[-0.25px]">
+          Add Comment
+        </h1>
+        <textarea
+          className="outline-none w-[279px] h-20 p-4 break-all text-[13px] text-[#3a4374] font-[400] rounded-[5px] bg-[#f7f8fd] placeholder:text-[13px] placeholder:text-[#8c92b3] placeholder:font-[500] mt-6"
+          placeholder="Type your comment here"
+          type="text"
+          name=""
+          id=""
+        />
+        <div className="flex items-center justify-between mt-4">
+          <p className="text-[13px] text-[#647196] font-[400]">
+            <span></span>
+            Characters left
+          </p>
+          <button className="w-[119px] h-10 bg-[#ad1fea] rounded-[10px] text-[13px] text-[#f2f4fe] font-[700]">
+            Post Comment
+          </button>
         </div>
       </section>
     </div>
