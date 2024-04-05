@@ -1,14 +1,15 @@
 import styled from "styled-components";
+import { useState } from "react";
 
 export default function FeedbackCard({ feedback, setData }) {
   //   console.log(feedback);
-  // ?????????????????????? cconsole.log(selectedFilter); ??????? FIX
+  // ???????? FIX
 
   const commentCount = Array.isArray(feedback.comments)
     ? feedback.comments.length
     : 0;
 
-  const hasUpvoted = feedback.hasUpvoted;
+  const [hasUpvoted, setHasUpvoted] = useState(false);
 
   const onUpvoteClick = () => {
     setData((prevData) => {
@@ -17,11 +18,12 @@ export default function FeedbackCard({ feedback, setData }) {
         (item) => item.id === feedback.id
       );
       if (hasUpvoted) {
-        feedbackItem.upvotes -= 1; // Downvote if already upvoted
+        feedbackItem.upvotes -= 1;
+        setHasUpvoted(false);
       } else {
-        feedbackItem.upvotes += 1; // Upvote if not yet upvoted
+        feedbackItem.upvotes += 1;
+        setHasUpvoted(true); // upvote if not upvoted
       }
-      feedbackItem.hasUpvoted = !hasUpvoted;
 
       return newData;
     });
@@ -37,7 +39,7 @@ export default function FeedbackCard({ feedback, setData }) {
       <p className="feedback-text">{feedback.description}</p>
       <FeatureIcon>{feedback.category}</FeatureIcon>
       <div className="upvote-comment-container">
-        <UpvoteBox onClick={onUpvoteClick}>
+        <UpvoteBox hasUpvoted={hasUpvoted} onClick={onUpvoteClick}>
           <img src="/assets/shared/icon-arrow-up.svg" alt="icon of arrow up" />
           <span className="upvote-count">{feedback.upvotes}</span>
         </UpvoteBox>
@@ -128,15 +130,12 @@ const UpvoteBox = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
-  background: rgba(242, 244, 254, 1);
+  background: ${(props) =>
+    props.hasUpvoted ? "rgba(207, 215, 255, 1)" : "rgba(242, 244, 254, 1)"};
   padding: 7px 13px;
   width: 69px;
   border-radius: 10px;
   cursor: pointer;
-
-  &:hover {
-    background-color: rgba(207, 215, 255, 1);
-  }
 
   & .upvote-count {
     color: rgba(58, 67, 116, 1);
