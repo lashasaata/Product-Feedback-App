@@ -3,7 +3,7 @@ import datajson from "../data.json";
 function Feedback() {
   // const params = useParams();
   const choosen = datajson.productRequests[1];
-  // console.log(choosen);
+  console.log(choosen);
   return (
     <div className="bg-[#f7f8fd] flex flex-col items-center gap-6">
       <header className="w-[327px] flex items-center justify-between mt-6">
@@ -42,6 +42,69 @@ function Feedback() {
           </div>
         </div>
       </section>
+      <main className="flex flex-col items-start gap-6 w-[327px] bg-white rounded-[10px] py-6 pl-[23px] pr-6">
+        <h1>
+          <span></span> Comments
+        </h1>
+        <div>
+          {choosen.comments.map((e) => {
+            return (
+              <div key={e.id}>
+                <div>
+                  <div>
+                    <div>
+                      <img src={e.user.image} alt="avatar" />
+                      <div>
+                        <span>{e.user.name}</span>
+                        <span>{e.user.username}</span>
+                      </div>
+                      <span>Reply</span>
+                    </div>
+                  </div>
+                  <p>{e.content}</p>
+                  <section>
+                    <textarea />
+                    <button>Post Reply</button>
+                  </section>
+                </div>
+                {e.replies ? (
+                  <section>
+                    {e.replies.map((e, index) => {
+                      return (
+                        <div key={index}>
+                          <div>
+                            <img src={e.user.image} alt="avatar" />
+                            <div>
+                              <span>{e.user.name}</span>
+                              <span>{e.user.username}</span>
+                            </div>
+                            <span>Reply</span>
+                          </div>
+                          <p>
+                            <span>{e.replyingTo}</span>
+                            {e.content}
+                          </p>
+                          <section>
+                            <textarea
+                              name=""
+                              id=""
+                              cols="30"
+                              rows="10"
+                            ></textarea>
+                            <button>Post Reply</button>
+                          </section>
+                        </div>
+                      );
+                    })}
+                  </section>
+                ) : (
+                  ""
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </main>
       <section className="w-[327px] bg-white rounded-[10px] p-6 mb-20">
         <h1 className="text-lg text-[#3a4374] font-[700] tracking-[-0.25px]">
           Add Comment
