@@ -12,7 +12,8 @@
 body,
 button,
 form,
-span {
+span,
+input {
   font-family: "Jost", sans-serif;
   box-sizing: border-box;
 }
@@ -25,7 +26,7 @@ body {
 @media (min-width: 768px) {
   body {
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     justify-content: center;
   }
 }
