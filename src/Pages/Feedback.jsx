@@ -1,18 +1,29 @@
 import { useParams } from "react-router";
+import { useNavigate } from "react-router-dom";
 import datajson from "../data.json";
 function Feedback() {
-  // const params = useParams();
-  const choosen = datajson.productRequests[1];
+  const navigate = useNavigate();
+  const params = useParams();
+  const id = params.id;
+  const choosen = datajson.productRequests[id - 1];
   console.log(choosen);
-  console.log(choosen.comments.length - 1);
+
   return (
     <div className="bg-[#f7f8fd] flex flex-col items-center gap-6">
       <header className="w-[327px] flex items-center justify-between mt-6">
         <div className="flex items-center gap-[15.7px]">
           <img src="./assets/shared/icon-arrow-left.svg" alt="arrow_icon" />
-          <span className="text-[13px] text-[#647196] font-[700]">Go Back</span>
+          <span
+            onClick={() => navigate("/feedbacks")}
+            className="text-[13px] text-[#647196] font-[700]"
+          >
+            Go Back
+          </span>
         </div>
-        <button className="w-[119px] h-10 rounded-[10px] bg-[#4661e6] text-[13px] text-[#f2f4fe] font-[700]">
+        <button
+          onClick={() => navigate("edit-feedback")}
+          className="w-[119px] h-10 rounded-[10px] bg-[#4661e6] text-[13px] text-[#f2f4fe] font-[700]"
+        >
           Edit Feedback
         </button>
       </header>
