@@ -15,13 +15,13 @@ function App() {
       <Link to={"new-feedback"}></Link>
       <Link to={"edit-feedback"}></Link>
       <Link to={"roadmap"}></Link> */}
-      {/* <Routes>
+      <Routes>
         <Route path="/feedbacks" element={<Suggestions />} />
         <Route path="/feedbacks/:id" element={<Feedback />} />
         <Route path="new-feedback" element={<NewFeedback />} />
         <Route path="edit-feedback" element={<EditFeedback />} />
         <Route path="roadmap" element={<Roadmap />} />
-      </Routes> */}
+      </Routes>
     </>
   );
 }
