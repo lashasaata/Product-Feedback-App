@@ -3,6 +3,7 @@ import GoBack from "../../roadmap/Go-back";
 import Form from "../shared-components/Form";
 import FeedbackTitle from "../shared-components/FdbckTitle";
 import Category from "../shared-components/Category";
+import FdbckComment from "../shared-components/FdbckComment";
 
 export default function NewFeedback() {
   return (
@@ -24,6 +25,7 @@ export default function NewFeedback() {
           <h1 id="form-title">Create New Feedback</h1>
           <FeedbackTitle />
           <Category />
+          <FdbckComment />
         </Form>
       </Main>
     </FeedbackContainer>

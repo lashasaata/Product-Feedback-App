@@ -1,10 +1,12 @@
 import styled from "styled-components";
+import Title from "./Title";
+import Headline from "./Headline";
 
 export default function FeedbackTitle() {
   return (
     <TitleContainer>
-      <h3 className="feedback-title">Feedback Title</h3>
-      <p className="headline-description">Add a short, descriptive headline</p>
+      <Title>Feedback Title</Title>
+      <Headline>Add a short, descriptive headline</Headline>
       <input
         className="feedback-headline-input"
         type="text"
@@ -17,21 +19,6 @@ export default function FeedbackTitle() {
 
 const TitleContainer = styled.div`
   font-size: 13px;
-
-  & .feedback-title {
-    font-weight: 700;
-    line-height: 18.79px;
-    letter-spacing: -0.1805555522441864px;
-    color: rgba(58, 67, 116, 1);
-    margin-top: 24px;
-  }
-
-  & .headline-description {
-    font-weight: 400;
-    line-height: 18.79px;
-    color: rgba(100, 113, 150, 1);
-    margin-top: 3px;
-  }
 
   & .feedback-headline-input {
     background: rgba(247, 248, 253, 1);
