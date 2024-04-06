@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import Hamburger from "/assets/shared/mobile/icon-hamburger.svg";
-import Close from "/assets/shared/mobile/icon-close.svg";
 import ArrowDown from "/assets/shared/icon-arrow-down.svg";
 import ArrowUp from "/assets/shared/icon-arrow-up.svg";
 import SuggestionImg from "/assets/suggestions/icon-suggestions.svg"
@@ -89,7 +87,7 @@ export default function Feedbacks({ data, setData }) {
 
     return (
         <div className="md:bg-slate-100 md:px-[39px] md:py-[56px] md:flex md:flex-col md:gap-6 lg:flex-row lg:px-[165px] lg:py-[96px]">
-            <Header sidebarVisible={sidebarVisible} setSidebarVisible={setSidebarVisible} opacity={opacity} setOpacity={setOpacity} uniqueCategories={uniqueCategories} getStatusCounts={getStatusCounts} sortedFeedbacks={sortedFeedbacks} sortBy={sortBy} showSortOptions={showSortOptions} setShowSortOptions={setShowSortOptions} handleCategoryClick={handleCategoryClick}/>
+            <Header sidebarVisible={sidebarVisible} setSidebarVisible={setSidebarVisible} opacity={opacity} setOpacity={setOpacity} uniqueCategories={uniqueCategories} getStatusCounts={getStatusCounts} sortedFeedbacks={sortedFeedbacks} sortBy={sortBy} showSortOptions={showSortOptions} setShowSortOptions={setShowSortOptions} handleCategoryClick={handleCategoryClick} selectedCategory={selectedCategory}/>
 
             {showSortOptions && (
                 <div className="absolute rounded-lg bg-white cursor-pointer left-[58px] top-[112px] md:left-[44%] md:top-[371px] lg:left-[56%] lg:top-[145px]" style={{boxShadow: '0 10px 40px -7px rgba(55, 63, 104, 0.35)'  }}>
@@ -102,11 +100,12 @@ export default function Feedbacks({ data, setData }) {
 
             <div className="h-screen p-6 bg-slate-100 flex flex-col gap-6 w-3/4" style={{ display: sidebarVisible ? 'flex' : 'none' }}>
                 <div className='bg-white rounded-lg flex flex-wrap gap-2 p-6'>
-                    <button className="p-1.5 md:p-2.5 lg:p-3 rounded-lg bg-blue-100 text-blue-600 text-sm md:text-base font-semibold" onClick={() => handleCategoryClick(null)}>All</button>
+                    <button className={`p-1.5 md:p-2.5 lg:p-3 rounded-lg ${(selectedCategory === null ? 'bg-blue-600 text-white':"bg-blue-100 text-blue-600")} text-sm md:text-base font-semibold`} onClick={() => handleCategoryClick(null)}>All</button>
                     {uniqueCategories.map((category,index)=>{
-                        return <Category key={index} onClick={() => handleCategoryClick(category)} theCategory={category}/>
+                        return <Category key={index} onClick={() => handleCategoryClick(category)} theCategory={category} isSelected={selectedCategory === category} />
                     })}
                 </div>
+                {/* {console.log(selectedCategory)} */}
 
                 <div className='bg-white rounded-lg flex flex-col p-6 gap-6'>
                     <div className='flex justify-between items-center'>
@@ -153,8 +152,9 @@ export default function Feedbacks({ data, setData }) {
                         sortedFeedbacks
                             .filter(feedback => selectedCategory === null || feedback.category === selectedCategory)
                             .map((feedback) => {
+                                const isUpvoted = upvotedFeedbacks.includes(feedback.id);
                                 return (
-                                    <Feedback key={feedback.id} feedback={feedback} onClick={() => handleUpvote(feedback.id)}/>
+                                    <Feedback key={feedback.id} feedback={feedback} onClick={() => handleUpvote(feedback.id)} isUpvoted={isUpvoted}/>
                                 );
                             })
                     )}

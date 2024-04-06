@@ -3,6 +3,7 @@
 #root {
   min-height: 100vh;
   font-family: "Jost";
+  background-color: #f7f8fd;
 }
 
 .headerImg{

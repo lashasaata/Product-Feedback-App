@@ -5,7 +5,7 @@ import ArrowDown from "/assets/shared/icon-arrow-down.svg";
 import ArrowUp from "/assets/shared/icon-arrow-up.svg";
 import SuggestionImg from "/assets/suggestions/icon-suggestions.svg";
 
-export default function Header({sidebarVisible,setSidebarVisible, opacity,setOpacity, uniqueCategories, getStatusCounts,sortedFeedbacks, sortBy, showSortOptions,handleCategoryClick, setShowSortOptions}){
+export default function Header({sidebarVisible,setSidebarVisible, opacity,setOpacity, uniqueCategories, getStatusCounts,sortedFeedbacks, sortBy, showSortOptions,handleCategoryClick, setShowSortOptions, selectedCategory}){
 
     const toggleSidebar = () => {
         setSidebarVisible(!sidebarVisible);
@@ -23,9 +23,9 @@ export default function Header({sidebarVisible,setSidebarVisible, opacity,setOpa
                     <img className='cursor-pointer md:hidden' src={sidebarVisible? Close: Hamburger} alt="icon hamburger" onClick={toggleSidebar} />
 
                     <div className='hidden bg-white rounded-lg md:flex flex-wrap items-start w-[200px] gap-2 p-6 '>
-                        <button className="p-1.5 md:p-2.5 lg:p-3 rounded-lg bg-blue-100 text-blue-600 text-sm md:text-base font-semibold" onClick={() => handleCategoryClick(null)}>All</button>
+                        <button className={`p-1.5 md:p-2.5 lg:p-3 rounded-lg ${(selectedCategory === null ? 'bg-blue-600 text-white':"bg-blue-100 text-blue-600")} text-sm md:text-base font-semibold`} onClick={() => handleCategoryClick(null)}>All</button>
                         {uniqueCategories.map((category,index)=>{
-                            return <Category key={index} onClick={() => handleCategoryClick(category)} theCategory={category}/>
+                            return <Category key={index} onClick={() => handleCategoryClick(category)} theCategory={category} isSelected={selectedCategory === category} />
                         })}
                     </div>
 
