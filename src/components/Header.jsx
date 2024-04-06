@@ -32,7 +32,7 @@ export default function Header({sidebarVisible,setSidebarVisible, opacity,setOpa
                     <div className='hidden bg-white rounded-lg md:flex flex-col p-6 gap-6 rounded-lg'>
                     <div className='flex justify-between items-center gap-4'>
                         <p className="text-lg md:text-xl font-bold tracking-wide text-gray-700">Roadmap</p>
-                        <p className="text-xs md:text-xl font-bold tracking-wide text-blue-600 underline">View</p>
+                        <p className="text-xs md:text-xl font-bold tracking-wide text-blue-600 hover:text-blue-400 underline cursor-pointer">View</p>
                     </div>
 
                     <div className='flex flex-col gap-2'>

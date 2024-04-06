@@ -105,7 +105,6 @@ export default function Feedbacks({ data, setData }) {
                         return <Category key={index} onClick={() => handleCategoryClick(category)} theCategory={category} isSelected={selectedCategory === category} />
                     })}
                 </div>
-                {/* {console.log(selectedCategory)} */}
 
                 <div className='bg-white rounded-lg flex flex-col p-6 gap-6'>
                     <div className='flex justify-between items-center'>
@@ -140,7 +139,7 @@ export default function Feedbacks({ data, setData }) {
                         <img src={showSortOptions?ArrowUp:ArrowDown} alt="arrow down icon"/>
                     </div>
 
-                    <div className="px-4 py-3 rounded-lg bg-purple-600">
+                    <div className="px-4 py-3 rounded-lg bg-purple-600 hover:hover:bg-purple-500">
                         <button className="text-xs font-bold text-white">+ Add Feedback</button>
                     </div>
                 </div>
