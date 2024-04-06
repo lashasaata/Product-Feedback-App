@@ -28,7 +28,13 @@ const HeaderContainer = styled.header`
   @media (min-width: 768px) {
     margin: 56px 40px 8px;
     width: 689px;
-    border-radius: 10px;
+    border-radius: 8px;
+  }
+
+  @media (min-width: 1440px) {
+    margin: 56px 40px 8px;
+    width: 1110px;
+    margin: 56px 165px 8px;
   }
 `;
 
@@ -46,6 +52,10 @@ const HeaderFlexGroup = styled.div`
         font-size: 14px;
       }
 
+      @media (min-width: 1440px) {
+        line-height: 20.23px;
+      }
+
       &:hover {
         text-decoration: underline;
       }
@@ -61,6 +71,10 @@ const HeaderFlexGroup = styled.div`
 
     @media (min-width: 768px) {
       font-size: 24px;
+    }
+
+    @media (min-width: 1440px) {
+      line-height: 34.68px;
     }
   }
 `;

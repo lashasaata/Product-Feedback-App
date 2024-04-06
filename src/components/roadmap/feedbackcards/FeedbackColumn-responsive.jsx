@@ -46,12 +46,22 @@ const ColumnContainer = styled.div`
   flex-direction: column;
   gap: 16px;
 
+  @media (min-width: 1440px) {
+    /* gap: 24px; */
+  }
+
   & .status {
     font-size: 14px;
     font-weight: 700;
     line-height: 20.23px;
     letter-spacing: -0.1944444477558136px;
     color: rgba(58, 67, 116, 1);
+
+    @media (min-width: 1440px) {
+      font-size: 18px;
+      line-height: 26.01px;
+      letter-spacing: -0.25px;
+    }
   }
 
   & .status-description {
@@ -59,6 +69,11 @@ const ColumnContainer = styled.div`
     font-weight: 400;
     line-height: 20.23px;
     color: rgba(100, 113, 150, 1);
+
+    @media (min-width: 1440px) {
+      font-size: 16px;
+      line-height: 23.12px;
+    }
   }
 
   & .status-box {
@@ -67,17 +82,3 @@ const ColumnContainer = styled.div`
     gap: 4px;
   }
 `;
-
-// <>
-// {filteredProductRequests.map((feedback) => {
-//   if (feedback.status !== "suggestion" && feedback.status === status) {
-//     return (
-//       <FeedbackCard
-//         key={feedback.id}
-//         feedback={feedback}
-//         setData={setData}
-//       />
-//     );
-//   }
-// })}
-// </>

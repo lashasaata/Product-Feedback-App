@@ -3,7 +3,6 @@ import { useState } from "react";
 
 export default function FeedbackCard({ feedback, setData }) {
   //   console.log(feedback);
-  // ???????? FIX
 
   const commentCount = Array.isArray(feedback.comments)
     ? feedback.comments.length
@@ -77,6 +76,11 @@ const SingleCard = styled.div`
     padding: 20px 20px 24px;
   }
 
+  @media (min-width: 1440px) {
+    width: 350px;
+    padding: 25px 32px 32px;
+  }
+
   & .status-container {
     display: flex;
     align-items: center;
@@ -92,6 +96,10 @@ const SingleCard = styled.div`
 
       @media (min-width: 768px) {
         font-size: 13px;
+      }
+
+      @media (min-width: 1440px) {
+        font-size: 16px;
       }
     }
 
@@ -123,6 +131,12 @@ const SingleCard = styled.div`
       margin-top: 14px;
     }
 
+    @media (min-width: 1440px) {
+      font-size: 18px;
+      line-height: 26.01px;
+      margin-top: 10px;
+    }
+
     &:hover {
       color: rgba(70, 97, 230, 1);
     }
@@ -135,6 +149,9 @@ const SingleCard = styled.div`
 
     @media (min-width: 768px) {
       font-size: 13px;
+    }
+    @media (min-width: 1440px) {
+      font-size: 16px;
     }
   }
 
@@ -158,6 +175,11 @@ const FeatureIcon = styled.span`
   @media (min-width: 768px) {
     margin-top: 24px;
   }
+
+  @media (min-width: 1440px) {
+    margin-top: 14px;
+    font-size: 13px;
+  }
 `;
 
 const UpvoteBox = styled.div`
@@ -170,6 +192,10 @@ const UpvoteBox = styled.div`
   width: 69px;
   border-radius: 10px;
   cursor: pointer;
+
+  @media (min-width: 1440px) {
+    padding: 11px 12px 10px 16px;
+  }
 
   & .upvote-count {
     color: rgba(58, 67, 116, 1);
@@ -187,5 +213,9 @@ const CommentContainer = styled.div`
     font-weight: 700;
     line-height: 18.79px;
     color: rgba(58, 67, 116, 1);
+
+    @media (min-width: 1440px) {
+      font-size: 16px;
+    }
   }
 `;

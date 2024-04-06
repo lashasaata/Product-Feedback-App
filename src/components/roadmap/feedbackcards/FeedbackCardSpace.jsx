@@ -82,18 +82,6 @@ export default function FeedBackCardSpace({
               );
             }
           })}
-
-        {/* {filteredProductRequests.map((feedback) => {
-            if (feedback.status !== "suggestion") {
-              return (
-                <FeedbackCard
-                  key={feedback.id}
-                  feedback={feedback}
-                  setData={setData}
-                />
-              );
-            }
-          })}  */}
       </FeedbackSpace>
     </>
   );
@@ -113,13 +101,17 @@ const CardsContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 2px;
 
   @media (min-width: 768px) {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
     align-items: flex-start;
+  }
+
+  @media (min-width: 1440px) {
+    gap: 30px;
   }
 `;
 
