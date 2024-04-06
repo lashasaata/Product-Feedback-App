@@ -24,6 +24,12 @@ const HeaderContainer = styled.header`
   background-color: rgba(55, 63, 104, 1);
   padding: 26px 24px;
   font-weight: 700;
+
+  @media (min-width: 768px) {
+    margin: 56px 40px 8px;
+    width: 689px;
+    border-radius: 10px;
+  }
 `;
 
 const HeaderFlexGroup = styled.div`
@@ -35,6 +41,10 @@ const HeaderFlexGroup = styled.div`
     & .go-back {
       font-size: 13px;
       line-height: 18.79px;
+
+      @media (min-width: 768px) {
+        font-size: 14px;
+      }
 
       &:hover {
         text-decoration: underline;
@@ -48,6 +58,10 @@ const HeaderFlexGroup = styled.div`
     letter-spacing: -0.25px;
     text-align: left;
     margin-top: 3px;
+
+    @media (min-width: 768px) {
+      font-size: 24px;
+    }
   }
 `;
 
@@ -59,6 +73,10 @@ const AddFeedBackButton = styled.button`
   border: none;
   border-radius: 10px;
   padding: 10.5px 17px;
+
+  @media (min-width: 768px) {
+    padding: 12px 25px;
+  }
 
   &:hover {
     background: rgba(199, 90, 246, 1);

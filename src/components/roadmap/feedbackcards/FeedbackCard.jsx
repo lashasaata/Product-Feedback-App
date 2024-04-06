@@ -72,15 +72,27 @@ const SingleCard = styled.div`
   line-height: 18.79px;
   width: 327px;
 
+  @media (min-width: 768px) {
+    width: 223px;
+    padding: 20px 20px 24px;
+  }
+
   & .status-container {
     display: flex;
     align-items: center;
     gap: 8px;
 
+    @media (min-width: 768px) {
+      gap: 16px;
+    }
+
     & .card-status {
       color: rgba(100, 113, 150, 1);
-
       font-weight: 400;
+
+      @media (min-width: 768px) {
+        font-size: 13px;
+      }
     }
 
     & .status-circle {
@@ -105,6 +117,12 @@ const SingleCard = styled.div`
     margin-top: 16px;
     cursor: pointer;
 
+    @media (min-width: 768px) {
+      font-size: 13px;
+      line-height: 18.79px;
+      margin-top: 14px;
+    }
+
     &:hover {
       color: rgba(70, 97, 230, 1);
     }
@@ -114,6 +132,10 @@ const SingleCard = styled.div`
     font-weight: 400;
     color: rgba(100, 113, 150, 1);
     margin-top: 9px;
+
+    @media (min-width: 768px) {
+      font-size: 13px;
+    }
   }
 
   & .upvote-comment-container {
@@ -132,6 +154,10 @@ const FeatureIcon = styled.span`
   font-weight: 600;
   margin-top: 13px;
   display: inline-block;
+
+  @media (min-width: 768px) {
+    margin-top: 24px;
+  }
 `;
 
 const UpvoteBox = styled.div`
