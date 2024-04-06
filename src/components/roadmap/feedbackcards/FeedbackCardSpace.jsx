@@ -51,16 +51,19 @@ export default function FeedBackCardSpace({
         {!isMobile && (
           <CardsContainer>
             <FeedbackColumn
+              getCountByStatus={getCountByStatus}
               filteredProductRequests={plannedRequests}
               setData={setData}
               status="planned"
             />
             <FeedbackColumn
+              getCountByStatus={getCountByStatus}
               filteredProductRequests={inProgressRequests}
               setData={setData}
               status="in-progress"
             />
             <FeedbackColumn
+              getCountByStatus={getCountByStatus}
               filteredProductRequests={liveRequests}
               setData={setData}
               status="live"

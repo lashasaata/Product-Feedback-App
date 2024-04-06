@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Header from "./Header";
 import RoadMapFilter from "./RoadmapFilter";
 import { useState } from "react";
+import { useScreenType } from "./window-width/WindowWidth";
 import FeedBackCardSpace from "./feedbackcards/FeedbackCardSpace";
 
 export default function RoadMap() {
@@ -14,15 +15,19 @@ export default function RoadMap() {
       .length;
   };
 
+  const { isMobile, isTablet, isDesktop } = useScreenType();
+
   return (
     <>
       <Header />
-      <RoadMapFilter
-        getCountByStatus={getCountByStatus}
-        selectedFilter={selectedFilter}
-        setSelectedFilter={setSelectedFilter}
-        productRequests={productRequests}
-      />
+      {isMobile && (
+        <RoadMapFilter
+          getCountByStatus={getCountByStatus}
+          selectedFilter={selectedFilter}
+          setSelectedFilter={setSelectedFilter}
+          productRequests={productRequests}
+        />
+      )}
 
       <FeedBackCardSpace
         getCountByStatus={getCountByStatus}
