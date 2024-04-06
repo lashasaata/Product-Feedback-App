@@ -18,8 +18,6 @@ export default function FeedbackTitle() {
 }
 
 const TitleContainer = styled.div`
-  font-size: 13px;
-
   & .feedback-headline-input {
     background: rgba(247, 248, 253, 1);
     width: 279px;
@@ -29,7 +27,7 @@ const TitleContainer = styled.div`
     padding: 10px 12px 12px 20px;
 
     font-family: Jost;
-    font-size: 13px;
+
     font-weight: 400;
     line-height: 21.68px;
     color: rgba(58, 67, 116, 1);

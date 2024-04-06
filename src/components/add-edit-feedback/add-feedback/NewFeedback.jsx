@@ -4,6 +4,9 @@ import Form from "../shared-components/Form";
 import FeedbackTitle from "../shared-components/FdbckTitle";
 import Category from "../shared-components/Category";
 import FdbckComment from "../shared-components/FdbckComment";
+import CancelButton from "../shared-components/buttons/CancelBtn";
+import AddButton from "../shared-components/buttons/AddBtn";
+import BtnContainer from "../shared-components/buttons/BtnContainer";
 
 export default function NewFeedback() {
   return (
@@ -26,6 +29,7 @@ export default function NewFeedback() {
           <FeedbackTitle />
           <Category />
           <FdbckComment />
+          <BtnContainer />
         </Form>
       </Main>
     </FeedbackContainer>

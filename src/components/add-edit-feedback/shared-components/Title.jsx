@@ -10,4 +10,5 @@ const FeedbackTitle = styled.h3`
   letter-spacing: -0.1805555522441864px;
   color: rgba(58, 67, 116, 1);
   margin-top: 24px;
+  font-size: 13px;
 `;
