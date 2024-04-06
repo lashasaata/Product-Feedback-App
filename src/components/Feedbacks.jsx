@@ -88,11 +88,11 @@ export default function Feedbacks({ data, setData }) {
     };
 
     return (
-        <div className="md:bg-slate-100 md:px-[39px] md:py-[56px] md:flex md:flex-col md:gap-6">
+        <div className="md:bg-slate-100 md:px-[39px] md:py-[56px] md:flex md:flex-col md:gap-6 lg:flex-row lg:px-[165px] lg:py-[96px]">
             <Header sidebarVisible={sidebarVisible} setSidebarVisible={setSidebarVisible} opacity={opacity} setOpacity={setOpacity} uniqueCategories={uniqueCategories} getStatusCounts={getStatusCounts} sortedFeedbacks={sortedFeedbacks} sortBy={sortBy} showSortOptions={showSortOptions} setShowSortOptions={setShowSortOptions} handleCategoryClick={handleCategoryClick}/>
 
             {showSortOptions && (
-                <div className="absolute rounded-lg bg-white cursor-pointer left-[58px] top-[112px] md:left-[44%] md:top-[371px]" style={{boxShadow: '0 10px 40px -7px rgba(55, 63, 104, 0.35)'  }}>
+                <div className="absolute rounded-lg bg-white cursor-pointer left-[58px] top-[112px] md:left-[44%] md:top-[371px] lg:left-[56%] lg:top-[145px]" style={{boxShadow: '0 10px 40px -7px rgba(55, 63, 104, 0.35)'  }}>
                     <SortOption onClick={() => { sortFeedbacks('mostUpvotes'); setShowSortOptions(false); }} textContent={"Most Upvotes"}/>
                     <SortOption onClick={() => { sortFeedbacks('leastUpvotes'); setShowSortOptions(false); }} textContent={"Least Upvotes"}/>
                     <SortOption onClick={() => { sortFeedbacks('mostComments'); setShowSortOptions(false); }} textContent={"Most Comments"}/>
@@ -128,19 +128,40 @@ export default function Feedbacks({ data, setData }) {
                 </div>
            </div>
 
-            <main className="bg-slate-100 p-6 flex gap-4 flex-col md:p-0" style={{ opacity: opacity }}>
-                {seggestedFeedbacks.length === 0 ? (
-                    <EmptyFeedbacks/>
-                ) : (
-                    sortedFeedbacks
-                        .filter(feedback => selectedCategory === null || feedback.category === selectedCategory)
-                        .map((feedback) => {
-                            return (
-                                <Feedback key={feedback.id} feedback={feedback} onClick={() => handleUpvote(feedback.id)}/>
-                            );
-                        })
-                )}
-            </main>
+           <div className='lg:w-[100%] lg:flex lg:flex-col lg:gap-6'>
+                <div className="py-2 px-6 bg-sky-950 hidden justify-between items-center md:rounded-lg lg:flex" style={{ opacity: opacity }}>
+
+                    <div className='hidden md:flex items-center gap-3'>
+                        <img src={SuggestionImg} alt="ico suggestion" />
+                        <p className="text-white text-lg font-bold tracking-tighter">{sortedFeedbacks.length} Suggestions</p>
+                    </div>
+
+                     <div className="cursor-pointer flex items-center gap-2" onClick={() => setShowSortOptions(!showSortOptions)}>
+                        <p className="text-xs text-white font-bold"><span className="font-normal opacity-75">Sort by : </span>{sortBy === 'mostUpvotes' ? 'Most Upvotes' : sortBy === 'leastUpvotes' ? 'Least Upvotes' : sortBy === 'mostComments' ? 'Most Comments' : 'Least Comments'}</p>
+                        <img src={showSortOptions?ArrowUp:ArrowDown} alt="arrow down icon"/>
+                    </div>
+
+                    <div className="px-4 py-3 rounded-lg bg-purple-600">
+                        <button className="text-xs font-bold text-white">+ Add Feedback</button>
+                    </div>
+                </div>
+
+               <main className="bg-slate-100 p-6 flex gap-4 flex-col md:p-0" style={{ opacity: opacity }}>
+                    {seggestedFeedbacks.length === 0 ? (
+                        <EmptyFeedbacks/>
+                    ) : (
+                        sortedFeedbacks
+                            .filter(feedback => selectedCategory === null || feedback.category === selectedCategory)
+                            .map((feedback) => {
+                                return (
+                                    <Feedback key={feedback.id} feedback={feedback} onClick={() => handleUpvote(feedback.id)}/>
+                                );
+                            })
+                    )}
+                </main>
+           </div>
+
+            
         </div>
     );
 }

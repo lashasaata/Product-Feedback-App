@@ -14,7 +14,7 @@ export default function Header({sidebarVisible,setSidebarVisible, opacity,setOpa
 
     return(
         <header className='md:flex md:flex-col md:gap-[40px]'>
-                <div className="headerImg w-full flex justify-between items-center  py-4 px-6 md:bg-none  md:bg-slate-100">
+                <div className="headerImg w-full flex justify-between items-center  py-4 px-6 md:bg-none  md:bg-slate-100 lg:flex-col lg:gap-4">
                     <div className="titleBackground md:w-[223px] md:h-[178px] md:p-6 rounded-lg md:flex md:flex-col md:justify-end">
                         <p className="text-base font-bold tracking-tight text-white md:text-xl">Frontend Mentor</p>
                         <p className="text-xs font-medium text-white opacity-75 md:text-base">Feedback Board</p>
@@ -49,7 +49,7 @@ export default function Header({sidebarVisible,setSidebarVisible, opacity,setOpa
                 </div>
                 </div>
 
-                <div className="py-2 px-6 bg-sky-950 flex justify-between items-center md:rounded-lg" style={{ opacity: opacity }}>
+                <div className="py-2 px-6 bg-sky-950 flex justify-between items-center md:rounded-lg lg:hidden" style={{ opacity: opacity }}>
 
                     <div className='hidden md:flex items-center gap-3'>
                         <img src={SuggestionImg} alt="ico suggestion" />
