@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import dataJson from "../../data.json";
+import styled from "styled-components";
 import Header from "./Header";
 import RoadMapFilter from "./RoadmapFilter";
 import { useState } from "react";
@@ -23,6 +23,7 @@ export default function RoadMap() {
         setSelectedFilter={setSelectedFilter}
         productRequests={productRequests}
       />
+
       <FeedBackCardSpace
         getCountByStatus={getCountByStatus}
         selectedFilter={selectedFilter}
@@ -33,3 +34,5 @@ export default function RoadMap() {
     </>
   );
 }
+
+const Main = styled.main``;

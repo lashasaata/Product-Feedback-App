@@ -12,21 +12,24 @@ export default function FeedbackCard({ feedback, setData }) {
   const [hasUpvoted, setHasUpvoted] = useState(false);
 
   const onUpvoteClick = () => {
+    const newHasUpvoted = !hasUpvoted;
+
     setData((prevData) => {
       const newData = JSON.parse(JSON.stringify(prevData));
       const feedbackItem = newData.productRequests.find(
         (item) => item.id === feedback.id
       );
-      if (hasUpvoted) {
-        feedbackItem.upvotes -= 1;
-        setHasUpvoted(false);
-      } else {
+
+      if (newHasUpvoted) {
         feedbackItem.upvotes += 1;
-        setHasUpvoted(true); // upvote if not upvoted
+      } else {
+        feedbackItem.upvotes -= 1;
       }
 
       return newData;
     });
+
+    setHasUpvoted(newHasUpvoted);
   };
 
   return (
@@ -100,6 +103,11 @@ const SingleCard = styled.div`
     letter-spacing: -0.1805555522441864px;
     color: rgba(58, 67, 116, 1);
     margin-top: 16px;
+    cursor: pointer;
+
+    &:hover {
+      color: rgba(70, 97, 230, 1);
+    }
   }
 
   & .feedback-text {

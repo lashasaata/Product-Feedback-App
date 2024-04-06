@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import FeedbackCard from "./FeedbackCard";
+import FeedbackColumn from "./FeedbackColumn-responsive";
+import { useScreenType } from "../window-width/WindowWidth";
 
 export default function FeedBackCardSpace({
   productRequests,
@@ -7,6 +9,8 @@ export default function FeedBackCardSpace({
   getCountByStatus,
   setData,
 }) {
+  const { isMobile, isTablet, isDesktop } = useScreenType();
+
   const filteredProductRequests =
     selectedFilter === "all"
       ? productRequests
@@ -17,12 +21,20 @@ export default function FeedBackCardSpace({
   const displayFilter =
     selectedFilter.charAt(0).toUpperCase() + selectedFilter.slice(1);
 
+  const plannedRequests = productRequests.filter(
+    (request) => request.status === "planned"
+  );
+  const inProgressRequests = productRequests.filter(
+    (request) => request.status === "in-progress"
+  );
+  const liveRequests = productRequests.filter(
+    (request) => request.status === "live"
+  );
+
   return (
     <>
       <FeedbackSpace>
-        {selectedFilter === "all" ? (
-          ""
-        ) : (
+        {isMobile && selectedFilter !== "all" && (
           <StatusInfoTitle>
             <h2>
               {displayFilter}{" "}
@@ -32,12 +44,31 @@ export default function FeedBackCardSpace({
                   : "(" + getCountByStatus(displayFilter) + ")"}
               </span>
             </h2>
-
             <p>Features currently being developed</p>
           </StatusInfoTitle>
         )}
-        <CardsContainer>
-          {filteredProductRequests.map((feedback) => {
+
+        {!isMobile && (
+          <CardsContainer>
+            <FeedbackColumn
+              filteredProductRequests={plannedRequests}
+              setData={setData}
+              status="planned"
+            />
+            <FeedbackColumn
+              filteredProductRequests={inProgressRequests}
+              setData={setData}
+              status="in-progress"
+            />
+            <FeedbackColumn
+              filteredProductRequests={liveRequests}
+              setData={setData}
+              status="live"
+            />
+          </CardsContainer>
+        )}
+        {isMobile &&
+          productRequests.map((feedback) => {
             if (feedback.status !== "suggestion") {
               return (
                 <FeedbackCard
@@ -48,26 +79,45 @@ export default function FeedBackCardSpace({
               );
             }
           })}
-        </CardsContainer>
+
+        {/* {filteredProductRequests.map((feedback) => {
+            if (feedback.status !== "suggestion") {
+              return (
+                <FeedbackCard
+                  key={feedback.id}
+                  feedback={feedback}
+                  setData={setData}
+                />
+              );
+            }
+          })}  */}
       </FeedbackSpace>
     </>
   );
 }
-
-const CardsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-`;
 
 const FeedbackSpace = styled.main`
   background: rgba(247, 248, 253, 1);
   height: fit-content;
   padding: 24px;
   display: flex;
+  align-items: center;
   flex-direction: column;
   gap: 24px;
+`;
+
+const CardsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+
+  @media (min-width: 768px) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    align-items: flex-start;
+  }
 `;
 
 const StatusInfoTitle = styled.div`

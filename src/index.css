@@ -19,5 +19,5 @@ span {
 
 body {
   background: rgba(247, 248, 253, 1);
-  height: 100dvh;
+  min-height: 100dvh;
 }
