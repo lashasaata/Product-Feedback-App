@@ -6,13 +6,43 @@ export default function NewFeedback() {
   return (
     <Main>
       <GoBack />
-      <Form />
+      <Form>
+        <div className="plus-container">
+          <img
+            id="plus-icon"
+            src="/assets/shared/icon-plus.svg"
+            alt="plus icon"
+          />
+        </div>
+      </Form>
     </Main>
   );
 }
 
 const Main = styled.div`
   padding: 34px 24px 77px;
+  .plus-container {
+    background: radial-gradient(
+      128.88% 128.88% at 103.9% -10.39%,
+      #e84d70 0%,
+      #a337f6 53.09%,
+      #28a7ed 100%
+    );
+
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: -19px;
+
+    & #plus-icon {
+      width: 11.45px;
+      height: 11.45px;
+    }
+  }
 
   .go-back-flex-group {
     display: flex;

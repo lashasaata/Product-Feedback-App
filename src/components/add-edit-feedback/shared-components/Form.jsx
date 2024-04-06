@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-export default function Form() {
-  return <FormContainer></FormContainer>;
+export default function Form({ children }) {
+  return <FormContainer>{children}</FormContainer>;
 }
 
 const FormContainer = styled.form`
@@ -9,4 +9,5 @@ const FormContainer = styled.form`
   background: rgba(255, 255, 255, 1);
   border-radius: 10px;
   margin-top: 54px;
+  position: relative;
 `;
