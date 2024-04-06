@@ -1,13 +1,11 @@
 import styled from "styled-components";
+import GoBack from "./Go-back";
 
 export default function Header() {
   return (
     <HeaderContainer>
       <HeaderFlexGroup>
-        <div className="go-back-flex-group">
-          <img src="/assets/shared/icon-arrow-left.svg" alt="Arrow Left" />
-          <button className="go-back">Go Back</button>
-        </div>
+        <GoBack />
         <h2 id="roadmap">Roadmap</h2>
       </HeaderFlexGroup>
 
