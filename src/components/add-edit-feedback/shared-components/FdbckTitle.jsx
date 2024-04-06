@@ -46,5 +46,10 @@ const TitleContainer = styled.div`
     font-weight: 400;
     line-height: 21.68px;
     color: rgba(58, 67, 116, 1);
+    cursor: pointer;
+
+    &:focus {
+      outline: 1px solid rgba(70, 97, 230, 1);
+    }
   }
 `;

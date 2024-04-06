@@ -2,6 +2,7 @@ import styled from "styled-components";
 import GoBack from "../../roadmap/Go-back";
 import Form from "../shared-components/Form";
 import FeedbackTitle from "../shared-components/FdbckTitle";
+import Category from "../shared-components/Category";
 
 export default function NewFeedback() {
   return (
@@ -22,6 +23,7 @@ export default function NewFeedback() {
           </div>
           <h1 id="form-title">Create New Feedback</h1>
           <FeedbackTitle />
+          <Category />
         </Form>
       </Main>
     </FeedbackContainer>
