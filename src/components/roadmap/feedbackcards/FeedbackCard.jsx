@@ -148,7 +148,8 @@ const SingleCard = styled.div`
     margin-top: 9px;
 
     @media (min-width: 768px) {
-      font-size: 13px;
+      font-size: 12.5px;
+      line-height: 18.79px;
     }
     @media (min-width: 1440px) {
       font-size: 16px;
