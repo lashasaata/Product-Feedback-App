@@ -1,5 +1,5 @@
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Suggestions from "./Pages/Suggestions";
 import Feedback from "./Pages/Feedback";
 import NewFeedback from "./Pages/NewFeedback";
@@ -9,6 +9,7 @@ function App() {
   return (
     <>
       <Routes>
+        <Route path="/" element={<Navigate to={"/feedbacks"} />} />
         <Route path="/feedbacks" element={<Suggestions />} />
         <Route path="/feedbacks/:id" element={<Feedback />} />
         <Route path="new-feedback" element={<NewFeedback />} />
