@@ -8,7 +8,20 @@ function Feedback() {
   const params = useParams();
   const id = params.id;
   const choosen = datajson.productRequests[id - 1];
+
+  let commentsAmout = 0;
+  if (choosen.comments) {
+    commentsAmout = commentsAmout + choosen.comments.length;
+    choosen.comments.map((e) => {
+      if (e.replies) {
+        return (commentsAmout = commentsAmout + e.replies.length);
+      } else {
+        return;
+      }
+    });
+  }
   console.log(choosen);
+
   const [commentValue, setCommentValue] = useState();
   const [charLength, setCharLength] = useState("250");
   const [commentError, setCommentError] = useState(false);
@@ -73,7 +86,7 @@ function Feedback() {
         <div className="hidden md:flex flex items-center gap-1 md:gap-2">
           <img src="/assets/shared/icon-comments.svg" alt="comments_icon" />
           <span className="text-[13px] md:text-base text-[#3a4374] font-[700] tracking-[-0.18px] md:tracking-[-0.22px]">
-            {choosen.comments.length}
+            {commentsAmout}
           </span>
         </div>
         <div className="flex items-center justify-between mt-[14px] md:hidden">
@@ -86,143 +99,145 @@ function Feedback() {
           <div className="flex items-center gap-1">
             <img src="/assets/shared/icon-comments.svg" alt="comments_icon" />
             <span className="text-[13px] text-[#3a4374] font-[700] tracking-[-0.18px]">
-              {choosen.comments.length}
+              {commentsAmout}
             </span>
           </div>
         </div>
       </section>
       <main className="flex flex-col items-start gap-6 md:gap-[28px] w-[327px] md:w-[689px] xl:w-[730px] bg-white rounded-[10px] py-6 pl-[23px] pr-6 md:px-[32px] md:pt-6 md:pb-[33px] xl:pb-10">
         <h1 className="text-lg text-[#3a4374] font-[700] tracking-[-0.25px]">
-          <span></span> Comments
+          <span>{commentsAmout}</span> Comments
         </h1>
         <div className="flex flex-col gap-6 md:gap-[32px]">
-          {choosen.comments.map((e, index) => {
-            return (
-              <div
-                key={e.id}
-                className={`${
-                  index < choosen.comments.length - 1
-                    ? "border-b border-solid border-[ #8c92b3]"
-                    : ""
-                } flex flex-col md:w-[625px] xl:w-[667px] md:flex-row gap-6 md:gap-[5px]`}
-              >
-                {e.replies ? (
-                  <div className="hidden md:flex md:flex-col md:items-center md:w-10 md:gap-[12px]">
-                    <img
-                      className="w-[40px] h-[40px] rounded-full"
-                      src={e.user.image}
-                      alt="avatar"
-                    />
-                    <div className="w-10"></div>
-                    <div className="hidden md:block md:h-[267px] md:w-[1px] md:border-l md:border-solid md:border-[#647196] md:opacity-10"></div>
-                  </div>
-                ) : (
-                  <div>
-                    <img
-                      className="hidden w-10 h-10 rounded-full md:flex"
-                      src={e.user.image}
-                      alt="avatar"
-                    />
-                  </div>
-                )}
-                <div className="flex flex-col md:ml-[27px] xl:ml-27 xl:mr-[-41px]">
-                  <div className="flex flex-col pb-6 md:pb-[32px] md:w-[553px] xl:w-[594px]">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-4 md:gap-[32px]">
+          {choosen.comments
+            ? choosen.comments.map((e, index) => {
+                return (
+                  <div
+                    key={e.id}
+                    className={`${
+                      index < choosen.comments.length - 1
+                        ? "border-b border-solid border-[ #8c92b3]"
+                        : ""
+                    } flex flex-col md:w-[625px] xl:w-[667px] md:flex-row gap-6 md:gap-[5px]`}
+                  >
+                    {e.replies ? (
+                      <div className="hidden md:flex md:flex-col md:items-center md:w-10 md:gap-[12px]">
                         <img
-                          className={`${
-                            e.replies ? "md:hidden" : "md:hidden"
-                          } w-10 h-10 rounded-full`}
+                          className="w-[40px] h-[40px] rounded-full"
                           src={e.user.image}
                           alt="avatar"
                         />
-                        <div className="flex flex-col">
-                          <span className="text-[13px] md:text-sm text-[#3a4374] font-[700] tracking-[-0.18px]">
-                            {e.user.name}
-                          </span>
-                          <span className="text-[13px] md:text-sm text-[#647196] font-[400]">
-                            @{e.user.username}
+                        <div className="w-10"></div>
+                        <div className="hidden md:block md:h-[267px] md:w-[1px] md:border-l md:border-solid md:border-[#647196] md:opacity-10"></div>
+                      </div>
+                    ) : (
+                      <div>
+                        <img
+                          className="hidden w-10 h-10 rounded-full md:flex"
+                          src={e.user.image}
+                          alt="avatar"
+                        />
+                      </div>
+                    )}
+                    <div className="flex flex-col md:ml-[27px] xl:ml-27 xl:mr-[-41px]">
+                      <div className="flex flex-col pb-6 md:pb-[32px] md:w-[553px] xl:w-[594px]">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-4 md:gap-[32px]">
+                            <img
+                              className={`${
+                                e.replies ? "md:hidden" : "md:hidden"
+                              } w-10 h-10 rounded-full`}
+                              src={e.user.image}
+                              alt="avatar"
+                            />
+                            <div className="flex flex-col">
+                              <span className="text-[13px] md:text-sm text-[#3a4374] font-[700] tracking-[-0.18px]">
+                                {e.user.name}
+                              </span>
+                              <span className="text-[13px] md:text-sm text-[#647196] font-[400]">
+                                @{e.user.username}
+                              </span>
+                            </div>
+                          </div>
+                          <span className="text-[13px] text-[#4661e6] font-[600] hover:underline hover:cursor-pointer">
+                            Reply
                           </span>
                         </div>
+                        <p className="text-[13px] md:text-[15px] text-[#647196] font-[400] mt-4 md:mt-[17px]">
+                          {e.content}
+                        </p>
+                        <section className="flex items-start justify-between mt-5 xl:mt-6">
+                          <textarea
+                            placeholder="Type your comment here"
+                            className="w-[190px] md:w-[400px] xl:w-[421px] h-[60px] md:h-[95px] bg-[#f7f8fd] rounded-[5px] outline-none resize-none p-2 md:p-3  text-[13px] md:text-[15px] text-[#3a4374] font-[400] hover:cursor-pointer hover:border hover:border-solid hover:border-[#4661e6]"
+                          />
+                          <button className="w-[80px] md:w-[117px] h-[28px] md:h-10 xl:h-11 rounded-[10px] bg-[#ad1fea] text-[13px] xl:text-sm text-[#f2f4fe] font-[700] hover:bg-[#c75af6] hover:cursor-pointer">
+                            Post Reply
+                          </button>
+                        </section>
                       </div>
-                      <span className="text-[13px] text-[#4661e6] font-[600] hover:underline hover:cursor-pointer">
-                        Reply
-                      </span>
-                    </div>
-                    <p className="text-[13px] md:text-[15px] text-[#647196] font-[400] mt-4 md:mt-[17px]">
-                      {e.content}
-                    </p>
-                    <section className="flex items-start justify-between mt-5 xl:mt-6">
-                      <textarea
-                        placeholder="Type your comment here"
-                        className="w-[190px] md:w-[400px] xl:w-[421px] h-[60px] md:h-[95px] bg-[#f7f8fd] rounded-[5px] outline-none resize-none p-2 md:p-3  text-[13px] md:text-[15px] text-[#3a4374] font-[400] hover:cursor-pointer hover:border hover:border-solid hover:border-[#4661e6]"
-                      />
-                      <button className="w-[80px] md:w-[117px] h-[28px] md:h-10 xl:h-11 rounded-[10px] bg-[#ad1fea] text-[13px] xl:text-sm text-[#f2f4fe] font-[700] hover:bg-[#c75af6] hover:cursor-pointer">
-                        Post Reply
-                      </button>
-                    </section>
-                  </div>
-                  {e.replies ? (
-                    <section className="w-[280px] md:w-[604px] xl:w-[621px] flex gap-[23px] md:ml-[-27px]">
-                      <div className="h-[216px] w-[1px] border-l border-solid border-[#647196] opacity-10 md:hidden"></div>
-                      <div>
-                        {e.replies.map((e, index) => {
-                          return (
-                            <div
-                              key={index}
-                              className="flex flex-col pb-6 md:pb-[17px]"
-                            >
-                              <div className="flex items-center justify-between">
-                                <div className="flex items-center gap-4 md:gap-[32px]">
-                                  <img
-                                    className="w-10 h-10 rounded-full"
-                                    src={e.user.image}
-                                    alt="avatar"
-                                  />
-                                  <div className="flex flex-col">
-                                    <span className="text-[13px] md:text-sm text-[#3a4374] font-[700] tracking-[-0.18px]">
-                                      {e.user.name}
-                                    </span>
-                                    <span className="text-[13px] md:text-sm text-[#647196] font-[400]">
-                                      {e.user.username}
+                      {e.replies ? (
+                        <section className="w-[280px] md:w-[604px] xl:w-[621px] flex gap-[23px] md:ml-[-27px]">
+                          <div className="h-[216px] w-[1px] border-l border-solid border-[#647196] opacity-10 md:hidden"></div>
+                          <div>
+                            {e.replies.map((e, index) => {
+                              return (
+                                <div
+                                  key={index}
+                                  className="flex flex-col pb-6 md:pb-[17px]"
+                                >
+                                  <div className="flex items-center justify-between">
+                                    <div className="flex items-center gap-4 md:gap-[32px]">
+                                      <img
+                                        className="w-10 h-10 rounded-full"
+                                        src={e.user.image}
+                                        alt="avatar"
+                                      />
+                                      <div className="flex flex-col">
+                                        <span className="text-[13px] md:text-sm text-[#3a4374] font-[700] tracking-[-0.18px]">
+                                          {e.user.name}
+                                        </span>
+                                        <span className="text-[13px] md:text-sm text-[#647196] font-[400]">
+                                          {e.user.username}
+                                        </span>
+                                      </div>
+                                    </div>
+                                    <span className="text-[13px] text-[#4661e6] font-[600] hover:underline hover:cursor-pointer">
+                                      Reply
                                     </span>
                                   </div>
+                                  <p className="md:w-[508px] xl:w-[548px] text-[13px] md:text-[15px] text-[#647196] font-[400] mt-4 xl:mt-[17px] md:mt-[10px] md:ml-[72px]">
+                                    <span className="text-[#ad1fea] font-[700]">
+                                      {e.replyingTo}
+                                    </span>{" "}
+                                    {e.content}
+                                  </p>
+                                  <section className="flex items-start justify-between mt-5 md:ml-[72px]">
+                                    <textarea
+                                      className="w-[175px] md:w-[350px] xl:w-[400px] h-[60px] md:h-[90px] bg-[#f7f8fd] rounded-[5px] outline-none resize-none p-2 md:p-3 text-[13px] md:text-sm text-[#3a4374] font-[400] hover:cursor-pointer hover:border hover:border-solid hover:border-[#4661e6]"
+                                      placeholder="Type your comment here"
+                                      name=""
+                                      id=""
+                                      cols="30"
+                                      rows="10"
+                                    ></textarea>
+                                    <button className="w-[70px] md:w-[100px] h-[28px] md:h-[35px] rounded-[10px] bg-[#ad1fea] text-[13px] md:text-sm text-[#f2f4fe] font-[700] hover:bg-[#c75af6] hover:cursor-pointer">
+                                      Post Reply
+                                    </button>
+                                  </section>
                                 </div>
-                                <span className="text-[13px] text-[#4661e6] font-[600] hover:underline hover:cursor-pointer">
-                                  Reply
-                                </span>
-                              </div>
-                              <p className="md:w-[508px] xl:w-[548px] text-[13px] md:text-[15px] text-[#647196] font-[400] mt-4 xl:mt-[17px] md:mt-[10px] md:ml-[72px]">
-                                <span className="text-[#ad1fea] font-[700]">
-                                  {e.replyingTo}
-                                </span>{" "}
-                                {e.content}
-                              </p>
-                              <section className="flex items-start justify-between mt-5 md:ml-[72px]">
-                                <textarea
-                                  className="w-[175px] md:w-[350px] xl:w-[400px] h-[60px] md:h-[90px] bg-[#f7f8fd] rounded-[5px] outline-none resize-none p-2 md:p-3 text-[13px] md:text-sm text-[#3a4374] font-[400] hover:cursor-pointer hover:border hover:border-solid hover:border-[#4661e6]"
-                                  placeholder="Type your comment here"
-                                  name=""
-                                  id=""
-                                  cols="30"
-                                  rows="10"
-                                ></textarea>
-                                <button className="w-[70px] md:w-[100px] h-[28px] md:h-[35px] rounded-[10px] bg-[#ad1fea] text-[13px] md:text-sm text-[#f2f4fe] font-[700] hover:bg-[#c75af6] hover:cursor-pointer">
-                                  Post Reply
-                                </button>
-                              </section>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </section>
-                  ) : (
-                    ""
-                  )}
-                </div>
-              </div>
-            );
-          })}
+                              );
+                            })}
+                          </div>
+                        </section>
+                      ) : (
+                        ""
+                      )}
+                    </div>
+                  </div>
+                );
+              })
+            : ""}
         </div>
       </main>
       <section className="w-[327px] md:w-[689px] xl:w-[730px] bg-white rounded-[10px] p-6 md:pl-[34px] md:pr-[32px] md:pb-[32px] mb-20">
