@@ -3,11 +3,12 @@ import { useNavigate } from "react-router-dom";
 import datajson from "../data.json";
 import { useState } from "react";
 function Feedback() {
-  // const [useData, setUseData] = useState(datajson);
+  const [useData, setUseData] = useState(datajson);
   const navigate = useNavigate();
   const params = useParams();
   const id = params.id;
   const choosen = datajson.productRequests[id - 1];
+  const choosenClon = choosen;
 
   let commentsAmout = 0;
   if (choosen.comments) {
@@ -41,6 +42,18 @@ function Feedback() {
     if (charLength == "250") {
       setCommentError(!commentError);
     }
+    if (!Array.isArray(choosenClon.comments)) {
+      choosenClon.comments = [];
+    }
+    choosenClon.comments.push({
+      id: Math.floor(Math.random() * 1000),
+      content: commentValue,
+      user: {
+        image: "/assets/user-images/image-zena.jpg",
+        name: "Zena Kelley",
+        username: "velvetround",
+      },
+    });
   };
   return (
     <div className="bg-[#f7f8fd] flex flex-col items-center gap-6">
