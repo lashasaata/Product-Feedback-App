@@ -28,10 +28,9 @@ const CategoryContainer = styled.div`
     height: 48px;
     margin-top: 16px;
     border-radius: 6px;
-    padding: 10px 12px 12px 20px;
+    padding: 15px 15px 14px 16px;
 
     font-family: Jost;
-    font-size: 13px;
     font-weight: 400;
     line-height: 21.68px;
     color: rgba(58, 67, 116, 1);

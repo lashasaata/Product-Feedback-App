@@ -9,7 +9,7 @@ export default function FdbckComment() {
       <Headline>
         Include any specific comments on what should be improved, added, etc.
       </Headline>
-      <input
+      <textarea
         className="feedback-comment"
         type="text"
         name="feedback-comment"
@@ -28,5 +28,15 @@ const CommentContainer = styled.div`
     background: rgba(247, 248, 253, 1);
     border-radius: 6px;
     margin-top: 16px;
+    padding: 16px 24px 16px 16px;
+
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 18.79px;
+    color: rgba(58, 67, 116, 1);
+
+    &:focus {
+      outline: 1px solid rgba(70, 97, 230, 1);
+    }
   }
 `;
