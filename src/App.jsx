@@ -4,7 +4,10 @@ import Feedback from "./Pages/Feedback";
 import NewFeedback from "./Pages/NewFeedback";
 import EditFeedback from "./Pages/EditFeedback";
 import Roadmap from "./Pages/Roadmap";
+
 function App() {
+  const [data, setData] = useState(dataJson); // this should be included in useContext(?)
+  // const { productRequests } = data;
   return (
     <>
       <Routes>

@@ -14,7 +14,8 @@
 body,
 button,
 form,
-span {
+span,
+input {
   font-family: "Jost", sans-serif;
   box-sizing: border-box;
 }
@@ -22,12 +23,13 @@ span {
 body {
   background: rgba(247, 248, 253, 1);
   min-height: 100dvh;
+  font-family: "Jost", sans-serif;
 }
 
 @media (min-width: 768px) {
   body {
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     justify-content: center;
   }
 }
