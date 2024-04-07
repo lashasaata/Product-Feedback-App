@@ -34,14 +34,34 @@ export default function NewFeedback({ data, setData }) {
 
 const Header = styled.header`
   padding: 34px 24px;
+  position: relative;
+  right: 125px;
+
+  @media (min-width: 768px) {
+    padding: 56px 0px 58px 0px;
+  }
+
+  @media (min-width: 1440px) {
+    padding: 92px 0px 68px 0px;
+  }
 `;
 
 const FeedbackContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   & #plus-icon {
     position: absolute;
     top: -20px;
     left: 24px;
     width: 40px;
+
+    @media (min-width: 768px) {
+      width: 56px;
+      top: -29px;
+      left: 42px;
+    }
   }
 
   .go-back-flex-group {
@@ -52,6 +72,10 @@ const FeedbackContainer = styled.div`
     font-size: 13px;
     font-weight: 700;
     line-height: 18.79px;
+
+    @media (min-width: 768px) {
+      font-size: 14px;
+    }
   }
 `;
 
@@ -67,5 +91,9 @@ const Main = styled.div`
     line-height: 26.01px;
     letter-spacing: -0.25px;
     color: rgba(58, 67, 116, 1);
+
+    @media (min-width: 768px) {
+      font-size: 24px;
+    }
   }
 `;

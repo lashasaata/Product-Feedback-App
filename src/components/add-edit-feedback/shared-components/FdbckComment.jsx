@@ -29,6 +29,7 @@ const CommentContainer = styled.div`
     border-radius: 6px;
     margin-top: 16px;
     padding: 16px 24px 16px 16px;
+    resize: none;
 
     font-size: 13px;
     font-weight: 400;
