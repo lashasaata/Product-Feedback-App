@@ -1,13 +1,15 @@
-import dataJson from "../../data.json";
+import { MyContext } from "../../App";
 import styled from "styled-components";
 import Header from "./Header";
 import RoadMapFilter from "./RoadmapFilter";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useScreenType } from "./window-width/WindowWidth";
 import FeedBackCardSpace from "./feedbackcards/FeedbackCardSpace";
 
 export default function RoadMap() {
-  const [data, setData] = useState(dataJson);
+  const context = useContext(MyContext);
+  const data = context.data;
+  const setData = context.setData;
   const [selectedFilter, setSelectedFilter] = useState("all");
   const { productRequests } = data;
   const getCountByStatus = (statusName) => {

@@ -1,5 +1,6 @@
+import Roadmap0 from "../components/roadmap/Roadmap0";
 function Roadmap() {
-  return;
+  return <Roadmap0 />;
 }
 
 export default Roadmap;

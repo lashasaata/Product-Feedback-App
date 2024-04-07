@@ -1,17 +1,27 @@
 import styled from "styled-components";
+import { useContext } from "react";
+import { MyContext } from "../../App";
 
 export default function Header() {
+  const context = useContext(MyContext);
   return (
     <HeaderContainer>
       <HeaderFlexGroup>
         <div className="go-back-flex-group">
           <img src="/assets/shared/icon-arrow-left.svg" alt="Arrow Left" />
-          <button className="go-back">Go Back</button>
+          <button
+            className="go-back"
+            onClick={() => context.navigate("/feedbacks")}
+          >
+            Go Back
+          </button>
         </div>
         <h2 id="roadmap">Roadmap</h2>
       </HeaderFlexGroup>
 
-      <AddFeedBackButton>+ Add Feedback</AddFeedBackButton>
+      <AddFeedBackButton onClick={() => context.navigate("/new-feedback")}>
+        + Add Feedback
+      </AddFeedBackButton>
     </HeaderContainer>
   );
 }

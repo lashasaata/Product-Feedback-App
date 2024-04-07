@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import datajson from "../data.json";
 import { useState } from "react";
 function Feedback() {
-  const [useData, setUseData] = useState(datajson);
   const navigate = useNavigate();
   const params = useParams();
   const id = params.id;
