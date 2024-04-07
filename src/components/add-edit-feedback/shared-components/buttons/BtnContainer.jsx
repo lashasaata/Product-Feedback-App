@@ -16,4 +16,10 @@ const ButtonsContainer = styled.div`
   flex-direction: column;
   gap: 16px;
   margin-top: 40px;
+
+  @media (min-width: 768px) {
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+    gap: 16px;
+  }
 `;

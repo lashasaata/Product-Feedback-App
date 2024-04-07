@@ -39,6 +39,7 @@ const Header = styled.header`
 
   @media (min-width: 768px) {
     padding: 56px 0px 58px 0px;
+    right: 223px;
   }
 
   @media (min-width: 1440px) {

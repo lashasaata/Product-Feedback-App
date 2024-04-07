@@ -11,4 +11,9 @@ const FeedbackTitle = styled.h3`
   color: rgba(58, 67, 116, 1);
   margin-top: 24px;
   font-size: 13px;
+
+  @media (min-width: 768px) {
+    font-size: 14px;
+    margin-top: 40px;
+  }
 `;

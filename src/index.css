@@ -21,6 +21,7 @@ input {
 body {
   background: rgba(247, 248, 253, 1);
   min-height: 100dvh;
+  font-family: "Jost", sans-serif;
 }
 
 @media (min-width: 768px) {

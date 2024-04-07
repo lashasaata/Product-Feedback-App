@@ -16,6 +16,12 @@ const AddButtonComponent = styled.button`
   line-height: 18.79px;
   color: rgba(242, 244, 254, 1);
 
+  @media (min-width: 768px) {
+    width: 144px;
+    padding: 12px 25px;
+    font-size: 14px;
+  }
+
   &:hover {
     background: rgba(199, 90, 246, 1);
   }

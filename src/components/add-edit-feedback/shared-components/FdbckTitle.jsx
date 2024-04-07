@@ -25,7 +25,6 @@ const TitleContainer = styled.div`
     margin-top: 16px;
     border-radius: 6px;
     padding: 15px 15px 14px 16px;
-
     font-family: Jost;
     font-size: 13px;
     font-weight: 400;
@@ -33,6 +32,11 @@ const TitleContainer = styled.div`
 
     color: rgba(58, 67, 116, 1);
     cursor: pointer;
+
+    @media (min-width: 768px) {
+      width: 456px;
+      font-size: 15px;
+    }
 
     &:focus {
       outline: 1px solid rgba(70, 97, 230, 1);

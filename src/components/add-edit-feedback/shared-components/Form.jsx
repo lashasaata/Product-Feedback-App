@@ -10,4 +10,8 @@ const FormContainer = styled.form`
   border-radius: 10px;
   margin-top: 54px;
   position: relative;
+
+  @media (min-width: 768px) {
+    padding: 52px 40px 42px;
+  }
 `;

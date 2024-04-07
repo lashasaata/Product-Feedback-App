@@ -63,6 +63,10 @@ export default function Category({ data, setData }) {
 const CategoryContainer = styled.div`
   font-size: 13px;
   position: relative;
+
+  @media (min-width: 768px) {
+    font-size: 14px;
+  }
 `;
 
 const DropdownSelected = styled.div`
@@ -81,6 +85,10 @@ const DropdownSelected = styled.div`
   justify-content: space-between;
   align-items: center;
   border: ${(props) => (props.isOpen ? "1px solid rgba(70, 97, 230, 1)" : "")};
+
+  @media (min-width: 768px) {
+    width: 456px;
+  }
 `;
 
 const DropdownIcon = styled.img`
@@ -97,7 +105,6 @@ const DropdownList = styled.div`
   border-radius: 6px;
   box-shadow: 0px 10px 40px -7px rgba(55, 63, 104, 0.35);
   padding: 10px 0;
-  z-index: 10;
 `;
 
 const DropdownOption = styled.div`
@@ -107,6 +114,10 @@ const DropdownOption = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  font-family: Jost;
+  font-weight: 400;
+  line-height: 21.68px;
+  color: rgba(100, 113, 150, 1);
 
   &:last-child {
     border-bottom: none; // Remove border for the last item

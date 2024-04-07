@@ -22,6 +22,11 @@ export default function FdbckComment() {
 const CommentContainer = styled.div`
   width: 279px;
 
+  @media (min-width: 768px) {
+    width: 431px;
+    font-family: Jost;
+  }
+
   & .feedback-comment {
     width: 279px;
     height: 120px;
@@ -30,11 +35,15 @@ const CommentContainer = styled.div`
     margin-top: 16px;
     padding: 16px 24px 16px 16px;
     resize: none;
-
     font-size: 13px;
     font-weight: 400;
     line-height: 18.79px;
     color: rgba(58, 67, 116, 1);
+
+    @media (min-width: 768px) {
+      width: 456px;
+      font-size: 15px;
+    }
 
     &:focus {
       outline: 1px solid rgba(70, 97, 230, 1);
