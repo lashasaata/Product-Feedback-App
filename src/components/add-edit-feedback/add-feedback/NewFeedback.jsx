@@ -4,11 +4,9 @@ import Form from "../shared-components/Form";
 import FeedbackTitle from "../shared-components/FdbckTitle";
 import Category from "../shared-components/Category";
 import FdbckComment from "../shared-components/FdbckComment";
-import CancelButton from "../shared-components/buttons/CancelBtn";
-import AddButton from "../shared-components/buttons/AddBtn";
 import BtnContainer from "../shared-components/buttons/BtnContainer";
 
-export default function NewFeedback() {
+export default function NewFeedback({ data, setData }) {
   return (
     <FeedbackContainer>
       <Header>
@@ -18,16 +16,14 @@ export default function NewFeedback() {
 
       <Main>
         <Form>
-          <div className="plus-container">
-            <img
-              id="plus-icon"
-              src="/assets/shared/icon-plus.svg"
-              alt="plus icon"
-            />
-          </div>
+          <img
+            id="plus-icon"
+            src="/assets/shared/icon-new-feedback.svg"
+            alt="plus icon"
+          />
           <h1 id="form-title">Create New Feedback</h1>
           <FeedbackTitle />
-          <Category />
+          <Category data={data} setData={setData} />
           <FdbckComment />
           <BtnContainer />
         </Form>
@@ -41,27 +37,11 @@ const Header = styled.header`
 `;
 
 const FeedbackContainer = styled.div`
-  .plus-container {
-    background: radial-gradient(
-      128.88% 128.88% at 103.9% -10.39%,
-      #e84d70 0%,
-      #a337f6 53.09%,
-      #28a7ed 100%
-    );
-
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  & #plus-icon {
     position: absolute;
-    top: -19px;
-
-    & #plus-icon {
-      width: 11.45px;
-      height: 11.45px;
-    }
+    top: -20px;
+    left: 24px;
+    width: 40px;
   }
 
   .go-back-flex-group {
