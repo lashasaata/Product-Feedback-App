@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-export default function AddButton() {
-  return <AddButtonComponent>Add Feedback</AddButtonComponent>;
+export default function AddButton({ children }) {
+  return <AddButtonComponent type="submit">{children}</AddButtonComponent>;
 }
 
 const AddButtonComponent = styled.button`

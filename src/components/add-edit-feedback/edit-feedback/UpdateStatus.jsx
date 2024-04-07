@@ -1,15 +1,15 @@
 import styled from "styled-components";
-import Title from "./Title";
-import Headline from "./Headline";
+import Title from "../shared-components/Title";
+import Headline from "../shared-components/Headline";
 import React, { useState, useRef, useEffect } from "react";
 import ArrowDown from "/assets/shared/icon-arrow-down.svg";
 import CheckIcon from "/assets/shared/icon-check.svg";
 
-export default function Category({ data, setData }) {
-  const allCategories = ["Feature", "UI", "UX", "Enhancement", "Bug", "Other"];
+export default function UpdateStatus() {
+  const allStatuses = ["Suggestion", "Planned", "In-progress", "Live"];
 
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(allCategories[0]);
+  const [selectedOption, setSelectedOption] = useState(allStatuses[0]); // prev. selected feature should be here
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -33,17 +33,17 @@ export default function Category({ data, setData }) {
   };
 
   return (
-    <>
+    <UpdateStatusContainer>
       <CategoryContainer ref={dropdownRef}>
-        <Title>Category</Title>
-        <Headline>Choose a category for your feedback</Headline>
+        <Title>Update Status</Title>
+        <Headline>Change feature state</Headline>
         <DropdownSelected isOpen={isOpen} onClick={toggleDropdown}>
           {selectedOption}
           <DropdownIcon src={ArrowDown} alt="dropdown arrow" isOpen={isOpen} />
         </DropdownSelected>
         {isOpen && (
           <DropdownList>
-            {allCategories.map((option, index) => (
+            {allStatuses.map((option, index) => (
               <DropdownOption
                 key={index}
                 onClick={() => handleSelection(option)}>
@@ -56,9 +56,11 @@ export default function Category({ data, setData }) {
           </DropdownList>
         )}
       </CategoryContainer>
-    </>
+    </UpdateStatusContainer>
   );
 }
+
+const UpdateStatusContainer = styled.div``;
 
 const CategoryContainer = styled.div`
   font-size: 13px;

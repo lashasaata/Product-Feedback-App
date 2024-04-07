@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-export default function Form({ children }) {
-  return <FormContainer>{children}</FormContainer>;
+export default function Form({ children, onSubmit }) {
+  return <FormContainer onSubmit={onSubmit}>{children}</FormContainer>;
 }
 
 const FormContainer = styled.form`

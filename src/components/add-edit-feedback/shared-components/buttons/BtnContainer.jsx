@@ -2,13 +2,8 @@ import styled from "styled-components";
 import AddButton from "./AddBtn";
 import CancelButton from "./CancelBtn";
 
-export default function BtnContainer() {
-  return (
-    <ButtonsContainer>
-      <AddButton />
-      <CancelButton />
-    </ButtonsContainer>
-  );
+export default function BtnContainer({ children }) {
+  return <ButtonsContainer>{children}</ButtonsContainer>;
 }
 
 const ButtonsContainer = styled.div`

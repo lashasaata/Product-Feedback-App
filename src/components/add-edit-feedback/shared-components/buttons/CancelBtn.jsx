@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export default function CancelButton() {
-  return <CancelButtonComponent>Cancel</CancelButtonComponent>;
+  return <CancelButtonComponent type="delete">Cancel</CancelButtonComponent>;
 }
 
 const CancelButtonComponent = styled.button`
