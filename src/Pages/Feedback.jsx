@@ -1,17 +1,38 @@
 import { useParams } from "react-router";
 import { useNavigate } from "react-router-dom";
 import datajson from "../data.json";
+import { useState } from "react";
 function Feedback() {
+  // const [useData, setUseData] = useState(datajson);
   const navigate = useNavigate();
   const params = useParams();
   const id = params.id;
   const choosen = datajson.productRequests[id - 1];
   console.log(choosen);
+  const [commentValue, setCommentValue] = useState();
+  const [charLength, setCharLength] = useState("250");
+  const [commentError, setCommentError] = useState(false);
 
+  console.log(datajson);
+
+  const handleComment = (e) => {
+    if (charLength > 0) {
+      setCommentValue(e.target.value);
+      setCharLength(`${250 - e.target.value.length}`);
+    } else {
+      setCharLength(charLength);
+    }
+  };
+
+  const commentPost = () => {
+    if (charLength == "250") {
+      setCommentError(!commentError);
+    }
+  };
   return (
     <div className="bg-[#f7f8fd] flex flex-col items-center gap-6">
       <header className="w-[327px] md:w-[689px] xl:w-[730px] flex items-center justify-between mt-6 xl:mt-10">
-        <div className="flex items-center gap-[15.7px]">
+        <div className="flex items-center gap-[15.7px] hover:underline hover:cursor-pointer">
           <img src="/assets/shared/icon-arrow-left.svg" alt="arrow_icon" />
           <span
             onClick={() => navigate("/feedbacks")}
@@ -22,14 +43,14 @@ function Feedback() {
         </div>
         <button
           onClick={() => navigate("edit-feedback")}
-          className="w-[119px] md:w-[142px] h-10 md:h-11 rounded-[10px] bg-[#4661e6] text-[13px] md:text-sm text-[#f2f4fe] font-[700]"
+          className="w-[119px] md:w-[142px] h-10 md:h-11 rounded-[10px] bg-[#4661e6] text-[13px] md:text-sm text-[#f2f4fe] font-[700] hover:bg-[#7c91f9] hover:cursor-pointer"
         >
           Edit Feedback
         </button>
       </header>
       <section className="w-[327px] md:w-[689px] xl:w-[730px] bg-white rounded-[10px] p-6 md:py-[28px] md:px-[32px] mt-6 md:flex md:justify-between">
         <div className="md:flex md:gap-10">
-          <div className="hidden md:flex w-[69px] md:w-10 h-[32px] md:h-[53px] rounded-[10px] bg-[#f2f4fe] flex md:flex-col items-center justify-center gap-[10px] md:gap-2">
+          <div className="hidden md:flex w-[69px] md:w-10 h-[32px] md:h-[53px] rounded-[10px] bg-[#f2f4fe] flex md:flex-col items-center justify-center gap-[10px] md:gap-2 hover:bg-[#cfd7ff] hover:cursor-pointer">
             <img src="/assets/shared/icon-arrow-up.svg" alt="arrow_icon" />
             <span className="text-[13px] text-[#3a4374] font-[700] tracking-[-0.18px]">
               {choosen.upvotes}
@@ -124,7 +145,7 @@ function Feedback() {
                           </span>
                         </div>
                       </div>
-                      <span className="text-[13px] text-[#4661e6] font-[600]">
+                      <span className="text-[13px] text-[#4661e6] font-[600] hover:underline hover:cursor-pointer">
                         Reply
                       </span>
                     </div>
@@ -134,9 +155,9 @@ function Feedback() {
                     <section className="flex items-start justify-between mt-5 xl:mt-6">
                       <textarea
                         placeholder="Type your comment here"
-                        className="w-[190px] md:w-[400px] xl:w-[421px] h-[60px] md:h-[95px] bg-[#f7f8fd] rounded-[5px] outline-none resize-none p-2 md:p-3  text-[13px] md:text-[15px] text-[#3a4374] font-[400]"
+                        className="w-[190px] md:w-[400px] xl:w-[421px] h-[60px] md:h-[95px] bg-[#f7f8fd] rounded-[5px] outline-none resize-none p-2 md:p-3  text-[13px] md:text-[15px] text-[#3a4374] font-[400] hover:cursor-pointer hover:border hover:border-solid hover:border-[#4661e6]"
                       />
-                      <button className="w-[80px] md:w-[117px] h-[28px] md:h-10 xl:h-11 rounded-[10px] bg-[#ad1fea] text-[13px] xl:text-sm text-[#f2f4fe] font-[700]">
+                      <button className="w-[80px] md:w-[117px] h-[28px] md:h-10 xl:h-11 rounded-[10px] bg-[#ad1fea] text-[13px] xl:text-sm text-[#f2f4fe] font-[700] hover:bg-[#c75af6] hover:cursor-pointer">
                         Post Reply
                       </button>
                     </section>
@@ -167,7 +188,7 @@ function Feedback() {
                                     </span>
                                   </div>
                                 </div>
-                                <span className="text-[13px] text-[#4661e6] font-[600]">
+                                <span className="text-[13px] text-[#4661e6] font-[600] hover:underline hover:cursor-pointer">
                                   Reply
                                 </span>
                               </div>
@@ -179,14 +200,14 @@ function Feedback() {
                               </p>
                               <section className="flex items-start justify-between mt-5 md:ml-[72px]">
                                 <textarea
-                                  className="w-[175px] md:w-[350px] xl:w-[400px] h-[60px] md:h-[90px] bg-[#f7f8fd] rounded-[5px] outline-none resize-none p-2 md:p-3 text-[13px] md:text-sm text-[#3a4374] font-[400]"
+                                  className="w-[175px] md:w-[350px] xl:w-[400px] h-[60px] md:h-[90px] bg-[#f7f8fd] rounded-[5px] outline-none resize-none p-2 md:p-3 text-[13px] md:text-sm text-[#3a4374] font-[400] hover:cursor-pointer hover:border hover:border-solid hover:border-[#4661e6]"
                                   placeholder="Type your comment here"
                                   name=""
                                   id=""
                                   cols="30"
                                   rows="10"
                                 ></textarea>
-                                <button className="w-[70px] md:w-[100px] h-[28px] md:h-[35px] rounded-[10px] bg-[#ad1fea] text-[13px] md:text-sm text-[#f2f4fe] font-[700]">
+                                <button className="w-[70px] md:w-[100px] h-[28px] md:h-[35px] rounded-[10px] bg-[#ad1fea] text-[13px] md:text-sm text-[#f2f4fe] font-[700] hover:bg-[#c75af6] hover:cursor-pointer">
                                   Post Reply
                                 </button>
                               </section>
@@ -208,19 +229,36 @@ function Feedback() {
         <h1 className="text-lg text-[#3a4374] font-[700] tracking-[-0.25px]">
           Add Comment
         </h1>
-        <textarea
-          className="outline-none resize-none w-[279px] md:w-[623px] xl:w-[664px] h-20 md:h-[80px] p-4 break-all text-[13px] md:text-sm xl:text-[15px] text-[#3a4374] font-[400] rounded-[5px] bg-[#f7f8fd] placeholder:text-[13px] md:placeholder:text-sm xl:placeholder:text-[15px] placeholder:text-[#8c92b3] placeholder:font-[500] mt-6"
-          placeholder="Type your comment here"
-          type="text"
-          name=""
-          id=""
-        />
+        <div className="flex flex-col gap-1">
+          <textarea
+            onChange={handleComment}
+            className={`${
+              commentError && charLength > 249
+                ? "border border-solid border-[#d73737]"
+                : "border-none"
+            } outline-none resize-none w-[279px] md:w-[623px] xl:w-[664px] h-20 md:h-[80px] p-4 break-all text-[13px] md:text-sm xl:text-[15px] text-[#3a4374] font-[400] rounded-[5px] bg-[#f7f8fd] placeholder:text-[13px] md:placeholder:text-sm xl:placeholder:text-[15px] placeholder:text-[#8c92b3] placeholder:font-[500] mt-6 hover:cursor-pointer hover:border hover:border-solid hover:border-[#4661e6]`}
+            placeholder="Type your comment here"
+            value={commentValue}
+            type="text"
+            name=""
+            id=""
+          />
+          {commentError && charLength > 249 ? (
+            <span className="text-xs text-red-500 font-[500] ml-1">
+              Can’t be empty
+            </span>
+          ) : (
+            ""
+          )}
+        </div>
         <div className="flex items-center justify-between mt-4">
           <p className="text-[13px] md:text-[15px] text-[#647196] font-[400]">
-            <span></span>
-            Characters left
+            <span>{charLength}</span> Characters left
           </p>
-          <button className="w-[119px] md:w-[142px] h-10 md:h-[44px] bg-[#ad1fea] rounded-[10px] text-[13px] md:text-sm text-[#f2f4fe] font-[700]">
+          <button
+            onClick={commentPost}
+            className="w-[119px] md:w-[142px] h-10 md:h-[44px] bg-[#ad1fea] rounded-[10px] text-[13px] md:text-sm text-[#f2f4fe] font-[700] hover:bg-[#c75af6] hover:cursor-pointer"
+          >
             Post Comment
           </button>
         </div>
