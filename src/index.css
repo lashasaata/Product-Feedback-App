@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap");
 
 @import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap");
 
@@ -8,4 +9,25 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body,
+button,
+form,
+span {
+  font-family: "Jost", sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  background: rgba(247, 248, 253, 1);
+  min-height: 100dvh;
+}
+
+@media (min-width: 768px) {
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }

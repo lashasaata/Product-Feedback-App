@@ -1,5 +1,3 @@
-import { useState } from "react";
-import "./App.css";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Suggestions from "./Pages/Suggestions";
 import Feedback from "./Pages/Feedback";
