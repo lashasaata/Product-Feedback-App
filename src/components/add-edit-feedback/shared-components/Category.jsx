@@ -4,8 +4,14 @@ import Headline from "./Headline";
 import React, { useState, useRef, useEffect } from "react";
 import ArrowDown from "/assets/shared/icon-arrow-down.svg";
 import CheckIcon from "/assets/shared/icon-check.svg";
+import { MyContext } from "../../../App";
+import { useContext } from "react";
 
-export default function Category({ data, setData }) {
+export default function Category() {
+  const context = useContext(MyContext);
+  const data = context.data;
+  const setData = context.setData;
+
   const allCategories = ["Feature", "UI", "UX", "Enhancement", "Bug", "Other"];
 
   const [isOpen, setIsOpen] = useState(false);
@@ -46,7 +52,8 @@ export default function Category({ data, setData }) {
             {allCategories.map((option, index) => (
               <DropdownOption
                 key={index}
-                onClick={() => handleSelection(option)}>
+                onClick={() => handleSelection(option)}
+              >
                 {option}
                 {option === selectedOption && (
                   <img src={CheckIcon} alt="Checked" />

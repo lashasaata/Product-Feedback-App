@@ -1,15 +1,17 @@
-import dataJson from "../../data.json"; // this should as well go to the app
+import { MyContext } from "../../App";
 import styled from "styled-components";
 import Header from "./Header";
 import RoadMapFilter from "./RoadmapFilter";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useScreenType } from "./window-width/WindowWidth";
 import FeedBackCardSpace from "./feedbackcards/FeedbackCardSpace";
 
 export default function RoadMap() {
-  const [data, setData] = useState(dataJson); // this should be passed from main component
-  const [selectedFilter, setSelectedFilter] = useState("all"); // maybe, this too.
-  const { productRequests } = data; // and i guess this one as well
+  const context = useContext(MyContext);
+  const data = context.data;
+  const setData = context.setData;
+  const [selectedFilter, setSelectedFilter] = useState("all");
+  const { productRequests } = data;
   const getCountByStatus = (statusName) => {
     return productRequests.filter((request) => request.status === statusName)
       .length;
