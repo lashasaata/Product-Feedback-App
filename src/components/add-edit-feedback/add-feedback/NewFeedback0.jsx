@@ -5,11 +5,21 @@ import FeedbackTitle from "../shared-components/FdbckTitle";
 import Category from "../shared-components/Category";
 import FdbckComment from "../shared-components/FdbckComment";
 import BtnContainer from "../shared-components/buttons/BtnContainer";
-import UpdateStatus from "./UpdateStatus";
 import AddButton from "../shared-components/buttons/AddBtn";
 import CancelButton from "../shared-components/buttons/CancelBtn";
+import { useForm, FormProvider } from "react-hook-form";
 
-export default function EditFeedback({ data, setData }) {
+export default function NewFeedback() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (formData) => {
+    console.log("Form submitted:", formData);
+  };
+
   return (
     <FeedbackContainer>
       <Header>
@@ -18,23 +28,19 @@ export default function EditFeedback({ data, setData }) {
       </Header>
 
       <Main>
-        <Form>
+        <Form onSubmit={handleSubmit(onSubmit)}>
           <img
             id="plus-icon"
-            src="/assets/shared/icon-edit-feedback.svg"
+            src="/assets/shared/icon-new-feedback.svg"
             alt="plus icon"
           />
           <h1 id="form-title">Create New Feedback</h1>
-          <FeedbackTitle />
-          <Category data={data} setData={setData} />
-          <UpdateStatus />
-          {/* here should be the value of previous feedback*/}
-          <FdbckComment />
+          <FeedbackTitle register={register} errors={errors} />
+          <Category />
+          <FdbckComment register={register} errors={errors} />
           <BtnContainer>
-            <div className="buttons-flex-group"></div>
-            <AddButton>Save Changes</AddButton>
+            <AddButton>Add Feedback</AddButton>
             <CancelButton />
-            <DeleteButton>Delete</DeleteButton>
           </BtnContainer>
         </Form>
       </Main>
@@ -106,31 +112,5 @@ const Main = styled.div`
     @media (min-width: 768px) {
       font-size: 24px;
     }
-  }
-`;
-
-const DeleteButton = styled.button`
-  background: rgba(215, 55, 55, 1);
-
-  border-radius: 10px;
-  padding: 10.5px 32px;
-  width: 100%;
-
-  font-family: Jost;
-  font-size: 13px;
-  font-weight: 700;
-  line-height: 18.79px;
-  color: rgba(242, 244, 254, 1);
-
-  @media (min-width: 768px) {
-    width: 93px;
-    padding: 12px 25px;
-    font-size: 14px;
-    position: relative;
-    left: -77px;
-  }
-
-  &:hover {
-    background: rgba(233, 136, 136, 1);
   }
 `;

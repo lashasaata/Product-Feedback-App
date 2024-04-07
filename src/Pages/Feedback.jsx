@@ -1,13 +1,11 @@
 import { useParams } from "react-router";
-import { useNavigate } from "react-router-dom";
-import datajson from "../data.json";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { MyContext } from "../App";
 function Feedback() {
-  const [useData, setUseData] = useState(datajson);
-  const navigate = useNavigate();
+  const context = useContext(MyContext);
   const params = useParams();
   const id = params.id;
-  const choosen = datajson.productRequests[id - 1];
+  const choosen = context.data.productRequests[id - 1];
   const choosenClon = choosen;
 
   let commentsAmout = 0;
@@ -21,13 +19,11 @@ function Feedback() {
       }
     });
   }
-  console.log(choosen);
 
   const [commentValue, setCommentValue] = useState();
   const [charLength, setCharLength] = useState("250");
   const [commentError, setCommentError] = useState(false);
-
-  console.log(datajson);
+  const [countId, setCountId] = useState(16);
 
   const handleComment = (e) => {
     if (charLength > 0) {
@@ -46,7 +42,7 @@ function Feedback() {
       choosenClon.comments = [];
     }
     choosenClon.comments.push({
-      id: Math.floor(Math.random() * 1000),
+      id: countId,
       content: commentValue,
       user: {
         image: "/assets/user-images/image-zena.jpg",
@@ -54,6 +50,11 @@ function Feedback() {
         username: "velvetround",
       },
     });
+    setCountId(countId + 1);
+    context.setData(
+      ([...[...context.data.productRequests][id - 1]].comments =
+        choosenClon.comments)
+    );
   };
   return (
     <div className="bg-[#f7f8fd] flex flex-col items-center gap-6">
@@ -61,14 +62,14 @@ function Feedback() {
         <div className="flex items-center gap-[15.7px] hover:underline hover:cursor-pointer">
           <img src="/assets/shared/icon-arrow-left.svg" alt="arrow_icon" />
           <span
-            onClick={() => navigate("/feedbacks")}
+            onClick={() => context.navigate("/feedbacks")}
             className="text-[13px] md:text-sm text-[#647196] font-[700]"
           >
             Go Back
           </span>
         </div>
         <button
-          onClick={() => navigate("edit-feedback")}
+          onClick={() => context.navigate(`/feedbacks/${id}/edit-feedback`)}
           className="w-[119px] md:w-[142px] h-10 md:h-11 rounded-[10px] bg-[#4661e6] text-[13px] md:text-sm text-[#f2f4fe] font-[700] hover:bg-[#7c91f9] hover:cursor-pointer"
         >
           Edit Feedback
