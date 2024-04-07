@@ -3,12 +3,13 @@ import Title from "./Title";
 import Headline from "./Headline";
 import React, { useState, useRef, useEffect } from "react";
 import ArrowDown from "/assets/shared/icon-arrow-down.svg";
+import CheckIcon from "/assets/shared/icon-check.svg";
 
 export default function Category({ data, setData }) {
+  const allCategories = ["Feature", "UI", "UX", "Enhancement", "Bug", "Other"];
+
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(
-    data.productRequests[0].category || "Feature"
-  );
+  const [selectedOption, setSelectedOption] = useState(allCategories[0]);
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -18,9 +19,10 @@ export default function Category({ data, setData }) {
         setIsOpen(false);
       }
     };
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [dropdownRef]);
+  }, []);
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
@@ -30,27 +32,25 @@ export default function Category({ data, setData }) {
     setIsOpen(false);
   };
 
-  // options list from data
-  const categoryOptions = data.productRequests.map(
-    (request) => request.category
-  );
-
   return (
     <>
       <CategoryContainer ref={dropdownRef}>
         <Title>Category</Title>
         <Headline>Choose a category for your feedback</Headline>
-        <DropdownSelected onClick={toggleDropdown}>
-          {selectedOption || "Select category"}
+        <DropdownSelected isOpen={isOpen} onClick={toggleDropdown}>
+          {selectedOption}
           <DropdownIcon src={ArrowDown} alt="dropdown arrow" isOpen={isOpen} />
         </DropdownSelected>
         {isOpen && (
           <DropdownList>
-            {categoryOptions.map((option, index) => (
+            {allCategories.map((option, index) => (
               <DropdownOption
                 key={index}
                 onClick={() => handleSelection(option)}>
                 {option}
+                {option === selectedOption && (
+                  <img src={CheckIcon} alt="Checked" />
+                )}
               </DropdownOption>
             ))}
           </DropdownList>
@@ -63,25 +63,6 @@ export default function Category({ data, setData }) {
 const CategoryContainer = styled.div`
   font-size: 13px;
   position: relative;
-
-  & .feedback-category-select {
-    background: rgba(247, 248, 253, 1);
-    width: 279px;
-    height: 48px;
-    margin-top: 16px;
-    border-radius: 6px;
-    padding: 15px 15px 14px 16px;
-
-    font-family: Jost;
-    font-weight: 400;
-    line-height: 21.68px;
-    color: rgba(58, 67, 116, 1);
-    cursor: pointer;
-
-    &:focus {
-      outline: 1px solid rgba(70, 97, 230, 1);
-    }
-  }
 `;
 
 const DropdownSelected = styled.div`
@@ -99,6 +80,7 @@ const DropdownSelected = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border: ${(props) => (props.isOpen ? "1px solid rgba(70, 97, 230, 1)" : "")};
 `;
 
 const DropdownIcon = styled.img`
@@ -113,7 +95,7 @@ const DropdownList = styled.div`
   background: white;
   width: 100%;
   border-radius: 6px;
-  box-shadow: 0px 10px 20px rgba(72, 84, 159, 0.25);
+  box-shadow: 0px 10px 40px -7px rgba(55, 63, 104, 0.35);
   padding: 10px 0;
   z-index: 10;
 `;
@@ -121,7 +103,17 @@ const DropdownList = styled.div`
 const DropdownOption = styled.div`
   padding: 10px 15px;
   cursor: pointer;
+  border-bottom: 1px solid rgba(58, 67, 116, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &:last-child {
+    border-bottom: none; // Remove border for the last item
+  }
+
   &:hover {
     background-color: rgba(247, 248, 253, 1);
+    color: rgba(173, 31, 234, 1);
   }
 `;
