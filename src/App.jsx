@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./App.css";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Suggestions from "./Pages/Suggestions";
@@ -13,7 +14,7 @@ function App() {
         <Route path="/feedbacks" element={<Suggestions />} />
         <Route path="/feedbacks/:id" element={<Feedback />} />
         <Route path="new-feedback" element={<NewFeedback />} />
-        <Route path="edit-feedback" element={<EditFeedback />} />
+        <Route path="/feedbacks/:id/edit-feedback" element={<EditFeedback />} />
         <Route path="roadmap" element={<Roadmap />} />
       </Routes>
     </>
