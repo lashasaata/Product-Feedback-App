@@ -1,7 +1,16 @@
 import styled from "styled-components";
-
+import { MyContext } from "../../../../App";
+import { useContext } from "react";
 export default function AddButton({ children }) {
-  return <AddButtonComponent type="submit">{children}</AddButtonComponent>;
+  const context = useContext(MyContext);
+  return (
+    <AddButtonComponent
+      onClick={() => context.navigate("/feedbacks")}
+      type="submit"
+    >
+      {children}
+    </AddButtonComponent>
+  );
 }
 
 const AddButtonComponent = styled.button`

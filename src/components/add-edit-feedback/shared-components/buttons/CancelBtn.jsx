@@ -1,7 +1,16 @@
 import styled from "styled-components";
-
+import { MyContext } from "../../../../App";
+import { useContext } from "react";
 export default function CancelButton() {
-  return <CancelButtonComponent type="delete">Cancel</CancelButtonComponent>;
+  const context = useContext(MyContext);
+  return (
+    <CancelButtonComponent
+      onClick={() => context.navigate("/feedbacks")}
+      type="delete"
+    >
+      Cancel
+    </CancelButtonComponent>
+  );
 }
 
 const CancelButtonComponent = styled.button`
