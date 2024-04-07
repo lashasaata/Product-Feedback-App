@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+
+#root {
+  min-height: 100vh;
+  font-family: "Jost";
+  background-color: #f7f8fd;
+}
+
+.headerImg{
+  background-image: radial-gradient(circle at 104% -10%, #e84d70, #a337f6 54%, #28a7ed 103%);
+  background-size: cover;
+  background-position: center;
+}
+
+@media screen and (min-width:768px){
+  .titleBackground{
+    background-image: radial-gradient(circle at 104% -10%, #e84d70, #a337f6 54%, #28a7ed 103%);
+    background-size: cover;
+    background-position: center;
+  }
+}
