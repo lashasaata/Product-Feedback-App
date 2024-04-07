@@ -241,7 +241,10 @@ export default function Feedbacks() {
           </div>
 
           <div className="px-4 py-3 rounded-lg bg-purple-600 hover:hover:bg-purple-500">
-            <button className="text-xs font-bold text-white">
+            <button
+              onClick={() => context.navigate("/new-feedback")}
+              className="text-xs font-bold text-white"
+            >
               + Add Feedback
             </button>
           </div>
