@@ -8,8 +8,18 @@ import BtnContainer from "../shared-components/buttons/BtnContainer";
 import UpdateStatus from "./UpdateStatus";
 import AddButton from "../shared-components/buttons/AddBtn";
 import CancelButton from "../shared-components/buttons/CancelBtn";
+import { useForm, FormProvider } from "react-hook-form";
 
 export default function EditFeedback() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (formData) => {
+    console.log("Form submitted:", formData);
+  };
   return (
     <FeedbackContainer>
       <Header>
@@ -18,18 +28,18 @@ export default function EditFeedback() {
       </Header>
 
       <Main>
-        <Form>
+        <Form onSubmit={handleSubmit(onSubmit)}>
           <img
             id="plus-icon"
             src="/assets/shared/icon-edit-feedback.svg"
             alt="plus icon"
           />
           <h1 id="form-title">Create New Feedback</h1>
-          <FeedbackTitle />
+          <FeedbackTitle register={register} errors={errors} />
           <Category />
           <UpdateStatus />
           {/* here should be the value of previous feedback*/}
-          <FdbckComment />
+          <FdbckComment register={register} errors={errors} />
           <BtnContainer>
             <div className="buttons-flex-group"></div>
             <AddButton>Save Changes</AddButton>
