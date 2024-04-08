@@ -7,9 +7,13 @@ import FdbckComment from "../shared-components/FdbckComment";
 import BtnContainer from "../shared-components/buttons/BtnContainer";
 import AddButton from "../shared-components/buttons/AddBtn";
 import CancelButton from "../shared-components/buttons/CancelBtn";
-import { useForm, FormProvider } from "react-hook-form";
+import { useForm } from "react-hook-form";
+import { MyContext } from "../../../App";
+import { useContext } from "react";
 
 export default function NewFeedback() {
+  const { navigate, setData, data } = useContext(MyContext);
+
   const {
     register,
     handleSubmit,
@@ -17,7 +21,27 @@ export default function NewFeedback() {
   } = useForm();
 
   const onSubmit = (formData) => {
+    const newFeedbackItem = {
+      id: data.productRequests.length + 1,
+      title: formData["feedback-title"],
+      category: formData.category,
+      upvotes: 0,
+      status: "suggestion",
+      description: formData["feedback-comment"],
+      comments: [],
+    };
+
+    setData((prevData) => {
+      return {
+        ...prevData,
+        productRequests: [...prevData.productRequests, newFeedbackItem],
+      };
+    });
+    navigate("/feedbacks");
+
     console.log("Form submitted:", formData);
+    console.log("New feedback item:", newFeedbackItem);
+    console.log("Updated data:", data);
   };
 
   return (
