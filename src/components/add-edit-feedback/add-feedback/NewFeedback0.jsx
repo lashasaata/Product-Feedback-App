@@ -18,7 +18,18 @@ export default function NewFeedback() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+    setValue,
+  } = useForm({
+    defaultValues: {
+      category: "Feature",
+      comments: [],
+      description: "",
+      id: "",
+      status: "suggestion",
+      title: "a",
+      upvote: 0,
+    },
+  });
 
   const onSubmit = (formData) => {
     const newFeedbackItem = {
@@ -60,7 +71,7 @@ export default function NewFeedback() {
           />
           <h1 id="form-title">Create New Feedback</h1>
           <FeedbackTitle register={register} errors={errors} />
-          <Category />
+          <Category setValue={setValue} />
           <FdbckComment register={register} errors={errors} />
           <BtnContainer>
             <AddButton>Add Feedback</AddButton>

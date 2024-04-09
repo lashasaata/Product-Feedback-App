@@ -8,9 +8,10 @@ import BtnContainer from "../shared-components/buttons/BtnContainer";
 import UpdateStatus from "./UpdateStatus";
 import AddButton from "../shared-components/buttons/AddBtn";
 import CancelButton from "../shared-components/buttons/CancelBtn";
-import { useForm, FormProvider } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { MyContext } from "../../../App";
 import { useContext } from "react";
+import React, { useCallback } from "react";
 
 export default function EditFeedback() {
   const { navigate, setData, data } = useContext(MyContext);
@@ -19,6 +20,7 @@ export default function EditFeedback() {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
   const onSubmit = (formData) => {

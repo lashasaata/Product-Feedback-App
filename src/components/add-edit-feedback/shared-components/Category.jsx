@@ -7,7 +7,7 @@ import CheckIcon from "/assets/shared/icon-check.svg";
 import { MyContext } from "../../../App";
 import { useContext } from "react";
 
-export default function Category() {
+export default function Category({ setValue }) {
   const context = useContext(MyContext);
   const data = context.data;
   const setData = context.setData;
@@ -30,12 +30,13 @@ export default function Category() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const toggleDropdown = () => setIsOpen(!isOpen);
+  const toggleDropdown = () => setIsOpen((state) => !state);
 
   const handleSelection = (option) => {
     setSelectedOption(option);
-    onSelectCategory(option); // pass selected option to parent's handler
     setIsOpen(false);
+    setValue("category", option);
+    console.log(option);
   };
 
   return (
@@ -52,8 +53,7 @@ export default function Category() {
             {allCategories.map((option, index) => (
               <DropdownOption
                 key={index}
-                onClick={() => handleSelection(option)}
-              >
+                onClick={() => handleSelection(option)}>
                 {option}
                 {option === selectedOption && (
                   <img src={CheckIcon} alt="Checked" />
