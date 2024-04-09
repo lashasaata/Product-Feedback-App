@@ -33,7 +33,7 @@ function Feedback() {
       setCharLength(charLength);
     }
   };
-  console.log("hi forked");
+  console.log("hi forked pr");
   const commentPost = () => {
     if (charLength == "250") {
       setCommentError(!commentError);
