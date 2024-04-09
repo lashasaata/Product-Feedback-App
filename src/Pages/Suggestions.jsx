@@ -1,4 +1,4 @@
-import Feedbacks from "../components/Feedbacks";
+import Feedbacks from "../components/suggestions/Feedbacks";
 
 function Suggestions() {
   return <Feedbacks />;
