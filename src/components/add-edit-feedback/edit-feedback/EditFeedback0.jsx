@@ -12,22 +12,37 @@ import { useForm } from "react-hook-form";
 import { MyContext } from "../../../App";
 import { useContext } from "react";
 import React, { useCallback } from "react";
+import { useLocation } from "react-router-dom";
 
 export default function EditFeedback() {
   const { navigate, setData, data } = useContext(MyContext);
+  const { search } = location;
+
+  const feedbackId = useLocation().pathname.split("/")[2];
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
-  } = useForm();
+    setValue,
+  } = useForm({
+    defaultValues: {
+      category: "Feature",
+      comments: [],
+      description: "",
+      id: feedbackId,
+      status: "suggestion",
+      title: "",
+      upvote: 0,
+    },
+  });
 
   const onSubmit = (formData) => {
     const newFeedbackItem = {
-      id: data.productRequests.length + 1,
+      id: Math.random(),
       title: formData["feedback-title"],
       category: formData.category,
+      suggestion: formData.suggestion,
       upvotes: 0,
       status: "suggestion",
       description: formData["feedback-comment"],

@@ -20,8 +20,7 @@ function App() {
           data,
           setData,
           navigate,
-        }}
-      >
+        }}>
         <Routes>
           <Route path="/" element={<Navigate to={"/feedbacks"} />} />
           <Route path="/feedbacks" element={<Suggestions />} />

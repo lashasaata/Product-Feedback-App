@@ -24,16 +24,16 @@ export default function NewFeedback() {
       category: "Feature",
       comments: [],
       description: "",
-      id: "",
+      id: Math.random(),
       status: "suggestion",
-      title: "a",
+      title: "",
       upvote: 0,
     },
   });
 
   const onSubmit = (formData) => {
     const newFeedbackItem = {
-      id: data.productRequests.length + 1,
+      id: Math.random(),
       title: formData["feedback-title"],
       category: formData.category,
       upvotes: 0,
