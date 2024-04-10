@@ -10,32 +10,55 @@ import AddButton from "../shared-components/buttons/AddBtn";
 import CancelButton from "../shared-components/buttons/CancelBtn";
 import { useForm } from "react-hook-form";
 import { MyContext } from "../../../App";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import React, { useCallback } from "react";
 import { useLocation } from "react-router-dom";
 
 export default function EditFeedback() {
   const { navigate, setData, data } = useContext(MyContext);
-  const { search } = location;
 
-  const feedbackId = useLocation().pathname.split("/")[2];
+  // find id of currently clicked feedback
+  const currFeedbackId = useLocation().pathname.split("/")[2];
+
+  // find all of the current feedback's content
+  const currentFeedback = data.productRequests.find(
+    (item) => item.id === Number(currFeedbackId)
+  );
+
+  const { search } = location;
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     setValue,
+    reset,
   } = useForm({
     defaultValues: {
-      category: "Feature",
-      comments: [],
-      description: "",
-      id: feedbackId,
-      status: "suggestion",
-      title: "",
-      upvote: 0,
+      id: currentFeedback.id,
+      title: currentFeedback.title,
+      category: currentFeedback.category,
+      upvotes: currentFeedback.upvotes,
+      status: currentFeedback.status,
+      description: currentFeedback.description,
+      comments: currentFeedback.comments,
     },
   });
+
+  useEffect(() => {
+    reset(
+      {
+        id: currentFeedback.id,
+        "feedback-title": currentFeedback.title,
+        category: currentFeedback.category,
+        upvotes: currentFeedback.upvotes,
+        status: currentFeedback.status,
+        "feedback-comment": currentFeedback.description,
+        comments: currentFeedback.comments,
+      }
+      // { keepDefaultValues: false }
+    );
+  }, []);
 
   const onSubmit = (formData) => {
     const newFeedbackItem = {
@@ -78,9 +101,8 @@ export default function EditFeedback() {
           />
           <h1 id="form-title">Create New Feedback</h1>
           <FeedbackTitle register={register} errors={errors} />
-          <Category />
+          <Category setValue={setValue} />
           <UpdateStatus />
-          {/* here should be the value of previous feedback*/}
           <FdbckComment register={register} errors={errors} />
           <BtnContainer>
             <div className="buttons-flex-group"></div>
