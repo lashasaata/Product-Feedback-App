@@ -36,7 +36,6 @@ export default function Category({ setValue }) {
     setSelectedOption(option);
     setIsOpen(false);
     setValue("category", option);
-    console.log(option);
   };
 
   return (

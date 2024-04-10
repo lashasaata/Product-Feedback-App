@@ -5,7 +5,7 @@ import React, { useState, useRef, useEffect } from "react";
 import ArrowDown from "/assets/shared/icon-arrow-down.svg";
 import CheckIcon from "/assets/shared/icon-check.svg";
 
-export default function UpdateStatus() {
+export default function UpdateStatus({ setValue }) {
   const allStatuses = ["Suggestion", "Planned", "In-progress", "Live"];
 
   const [isOpen, setIsOpen] = useState(false);
@@ -28,7 +28,7 @@ export default function UpdateStatus() {
 
   const handleSelection = (option) => {
     setSelectedOption(option);
-    onSelectCategory(option); // pass selected option to parent's handler
+    setValue("status", option);
     setIsOpen(false);
   };
 

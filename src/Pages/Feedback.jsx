@@ -48,8 +48,8 @@ function Feedback() {
       setCommentError(false);
     }
   };
-  console.log(commentError);
-  console.log(charLength);
+  // console.log(commentError);
+  // console.log(charLength);
 
   const commentPost = () => {
     if (!Array.isArray(choosenClon.comments)) {

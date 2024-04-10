@@ -33,6 +33,7 @@ export default function EditFeedback() {
     formState: { errors },
     setValue,
     reset,
+    watch,
   } = useForm({
     defaultValues: {
       id: currentFeedback.id,
@@ -55,27 +56,34 @@ export default function EditFeedback() {
         status: currentFeedback.status,
         "feedback-comment": currentFeedback.description,
         comments: currentFeedback.comments,
-      }
-      // { keepDefaultValues: false }
+      },
+      { keepDefaultValues: false }
     );
   }, []);
 
   const onSubmit = (formData) => {
     const newFeedbackItem = {
-      id: Math.random(),
-      title: formData["feedback-title"],
-      category: formData.category,
-      suggestion: formData.suggestion,
-      upvotes: 0,
-      status: "suggestion",
-      description: formData["feedback-comment"],
-      comments: [],
+      id: currentFeedback.id,
+      title: watch("feedback-title"),
+      category: currentFeedback.category,
+      upvotes: currentFeedback.upvotes,
+      status: currentFeedback.status,
+      description: watch("feedback-comment"),
+      comments: currentFeedback.comments,
     };
 
+    const feedbackIndex = data.productRequests.indexOf(currentFeedback);
+
     setData((prevData) => {
+      const newProductRequests = [
+        ...prevData.productRequests.slice(0, feedbackIndex),
+        newFeedbackItem,
+        ...prevData.productRequests.slice(feedbackIndex + 1),
+      ];
+
       return {
         ...prevData,
-        productRequests: [...prevData.productRequests, newFeedbackItem],
+        productRequests: newProductRequests,
       };
     });
     navigate("/feedbacks");
@@ -102,7 +110,7 @@ export default function EditFeedback() {
           <h1 id="form-title">Create New Feedback</h1>
           <FeedbackTitle register={register} errors={errors} />
           <Category setValue={setValue} />
-          <UpdateStatus />
+          <UpdateStatus setValue={setValue} />
           <FdbckComment register={register} errors={errors} />
           <BtnContainer>
             <div className="buttons-flex-group"></div>

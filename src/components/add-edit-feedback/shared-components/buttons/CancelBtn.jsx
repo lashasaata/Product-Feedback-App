@@ -6,8 +6,7 @@ export default function CancelButton() {
   return (
     <CancelButtonComponent
       onClick={() => context.navigate("/feedbacks")}
-      type="delete"
-    >
+      type="delete">
       Cancel
     </CancelButtonComponent>
   );
