@@ -12,7 +12,13 @@ export default function CancelButton() {
   const context = useContext(MyContext);
   return (
     <CancelButtonComponent
-      onClick={() => context.navigate(`/feedbacks/${params.id}`)}>
+      onClick={() => {
+        if (pathname === "edit-feedback") {
+          context.navigate(`/feedbacks/${params.id}`);
+        } else {
+          context.navigate(`/feedbacks`);
+        }
+      }}>
       Cancel
     </CancelButtonComponent>
   );
