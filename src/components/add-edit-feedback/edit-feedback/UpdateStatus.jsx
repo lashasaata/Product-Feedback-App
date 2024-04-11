@@ -6,7 +6,7 @@ import ArrowDown from "/assets/shared/icon-arrow-down.svg";
 import CheckIcon from "/assets/shared/icon-check.svg";
 
 export default function UpdateStatus({ setValue }) {
-  const allStatuses = ["Suggestion", "Planned", "In-progress", "Live"];
+  const allStatuses = ["suggestion", "planned", "in-progress", "live"];
 
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(allStatuses[0]); // prev. selected feature should be here
@@ -28,8 +28,8 @@ export default function UpdateStatus({ setValue }) {
 
   const handleSelection = (option) => {
     setSelectedOption(option);
-    setValue("status", option);
     setIsOpen(false);
+    setValue("status", option);
   };
 
   return (

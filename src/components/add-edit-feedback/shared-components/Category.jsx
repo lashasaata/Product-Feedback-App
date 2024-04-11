@@ -12,7 +12,7 @@ export default function Category({ setValue }) {
   const data = context.data;
   const setData = context.setData;
 
-  const allCategories = ["Feature", "UI", "UX", "Enhancement", "Bug", "Other"];
+  const allCategories = ["feature", "UI", "UX", "enhancement", "bug", "Other"];
 
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(allCategories[0]);

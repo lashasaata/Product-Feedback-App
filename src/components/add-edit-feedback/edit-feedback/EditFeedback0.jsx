@@ -35,16 +35,18 @@ export default function EditFeedback() {
     reset,
     watch,
   } = useForm({
-    defaultValues: {
-      id: currentFeedback.id,
-      title: currentFeedback.title,
-      category: currentFeedback.category,
-      upvotes: currentFeedback.upvotes,
-      status: currentFeedback.status,
-      description: currentFeedback.description,
-      comments: currentFeedback.comments,
-    },
+    // defaultValues: {
+    //   id: currentFeedback.id,
+    //   title: currentFeedback.title,
+    //   category: currentFeedback.category,
+    //   upvotes: currentFeedback.upvotes,
+    //   status: currentFeedback.status,
+    //   description: currentFeedback.description,
+    //   comments: currentFeedback.comments,
+    // },
   });
+
+  console.log(currentFeedback.category);
 
   useEffect(() => {
     reset(
@@ -56,8 +58,8 @@ export default function EditFeedback() {
         status: currentFeedback.status,
         "feedback-comment": currentFeedback.description,
         comments: currentFeedback.comments,
-      },
-      { keepDefaultValues: false }
+      }
+      // { keepDefaultValues: false }
     );
   }, []);
 
@@ -65,9 +67,9 @@ export default function EditFeedback() {
     const newFeedbackItem = {
       id: currentFeedback.id,
       title: watch("feedback-title"),
-      category: currentFeedback.category,
+      category: watch("category"),
       upvotes: currentFeedback.upvotes,
-      status: currentFeedback.status,
+      status: watch("status"),
       description: watch("feedback-comment"),
       comments: currentFeedback.comments,
     };
