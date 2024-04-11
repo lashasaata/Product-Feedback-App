@@ -28,10 +28,11 @@ function Feedback() {
   const [commentValue, setCommentValue] = useState();
   const [charLength, setCharLength] = useState("250");
   const [commentError, setCommentError] = useState(true);
+  const [validation, setValidation] = useState(false);
   const [countId, setCountId] = useState(16);
 
   const handleChange = (e) => {
-    handleComment(e), inputHandler();
+    handleComment(e), inputHandler(e);
   };
   const handleComment = (e) => {
     if (charLength > 0) {
@@ -41,15 +42,13 @@ function Feedback() {
       setCharLength(charLength);
     }
   };
-  const inputHandler = () => {
-    if (charLength == "250") {
+  const inputHandler = (e) => {
+    if (250 - e.target.value.length == "250") {
       setCommentError(true);
     } else {
       setCommentError(false);
     }
   };
-  console.log(commentError);
-  console.log(charLength);
 
   const commentPost = () => {
     if (!Array.isArray(choosenClon.comments)) {
@@ -78,6 +77,11 @@ function Feedback() {
       setCommentValue("");
       setCommentError(true);
       setCharLength(250);
+    }
+    if (commentError) {
+      setValidation(true);
+    } else {
+      setValidation(false);
     }
   };
   return (
@@ -286,7 +290,7 @@ function Feedback() {
           <textarea
             onChange={handleChange}
             className={`${
-              commentError && charLength > 249
+              commentError && charLength > 249 && validation
                 ? "border border-solid border-[#d73737]"
                 : "border-none"
             } outline-none resize-none w-[279px] md:w-[623px] xl:w-[664px] h-20 md:h-[80px] p-4 break-all text-[13px] md:text-sm xl:text-[15px] text-[#3a4374] font-[400] rounded-[5px] bg-[#f7f8fd] placeholder:text-[13px] md:placeholder:text-sm xl:placeholder:text-[15px] placeholder:text-[#8c92b3] placeholder:font-[500] mt-6 hover:cursor-pointer hover:border hover:border-solid hover:border-[#4661e6]`}
@@ -296,7 +300,7 @@ function Feedback() {
             name=""
             id=""
           />
-          {commentError && charLength > 249 ? (
+          {commentError && charLength > 249 && validation ? (
             <span className="text-xs text-red-500 font-[500] ml-1">
               Can’t be empty
             </span>
