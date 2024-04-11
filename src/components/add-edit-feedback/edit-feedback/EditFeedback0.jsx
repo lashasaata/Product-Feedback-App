@@ -13,6 +13,9 @@ import { MyContext } from "../../../App";
 import { useContext, useEffect } from "react";
 import React, { useCallback } from "react";
 import { useLocation } from "react-router-dom";
+import { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function EditFeedback() {
   const { navigate, setData, data } = useContext(MyContext);
@@ -45,8 +48,6 @@ export default function EditFeedback() {
       comments: currentFeedback.comments,
     },
   });
-
-  console.log(currentFeedback.category);
 
   useEffect(() => {
     reset(
@@ -90,13 +91,33 @@ export default function EditFeedback() {
     });
     navigate("/feedbacks");
 
-    console.log("Form submitted:", formData);
-    console.log("New feedback item:", newFeedbackItem);
-    console.log("Updated data:", data);
+    // console.log("Form submitted:", formData);
+    // console.log("New feedback item:", newFeedbackItem);
+    // console.log("Updated data:", data);
+  };
+
+  const handleDelete = (feedbackId) => {
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete this feedback?"
+    );
+    if (isConfirmed) {
+      setData((prevData) => {
+        return {
+          ...prevData,
+          productRequests: prevData.productRequests.filter(
+            (item) => item.id !== feedbackId
+          ),
+        };
+      });
+      navigate("/feedbacks");
+      // toast.success("Feedback deleted successfully!"); // not working.
+    }
   };
 
   return (
     <FeedbackContainer>
+      {/* <ToastContainer position="top-center" autoClose={3000} /> */}
+
       <Header>
         {" "}
         <GoBack />
@@ -118,7 +139,9 @@ export default function EditFeedback() {
             <div className="buttons-flex-group"></div>
             <AddButton>Save Changes</AddButton>
             <CancelButton />
-            <DeleteButton>Delete</DeleteButton>
+            <DeleteButton onClick={() => handleDelete(currentFeedback.id)}>
+              Delete
+            </DeleteButton>
           </BtnContainer>
         </Form>
       </Main>
