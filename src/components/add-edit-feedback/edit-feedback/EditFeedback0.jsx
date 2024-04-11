@@ -8,34 +8,84 @@ import BtnContainer from "../shared-components/buttons/BtnContainer";
 import UpdateStatus from "./UpdateStatus";
 import AddButton from "../shared-components/buttons/AddBtn";
 import CancelButton from "../shared-components/buttons/CancelBtn";
-import { useForm, FormProvider } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { MyContext } from "../../../App";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+import React, { useCallback } from "react";
+import { useLocation } from "react-router-dom";
 
 export default function EditFeedback() {
   const { navigate, setData, data } = useContext(MyContext);
+
+  // find id of currently clicked feedback
+  const currFeedbackId = useLocation().pathname.split("/")[2];
+
+  // find all of the current feedback's content
+  const currentFeedback = data.productRequests.find(
+    (item) => item.id === Number(currFeedbackId)
+  );
+
+  const category = currentFeedback.category;
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+    setValue,
+    reset,
+    watch,
+  } = useForm({
+    defaultValues: {
+      id: currentFeedback.id,
+      title: currentFeedback.title,
+      category: currentFeedback.category,
+      upvotes: currentFeedback.upvotes,
+      status: currentFeedback.status,
+      description: currentFeedback.description,
+      comments: currentFeedback.comments,
+    },
+  });
+
+  console.log(currentFeedback.category);
+
+  useEffect(() => {
+    reset(
+      {
+        id: currentFeedback.id,
+        "feedback-title": currentFeedback.title,
+        category: currentFeedback.category,
+        upvotes: currentFeedback.upvotes,
+        status: currentFeedback.status,
+        "feedback-comment": currentFeedback.description,
+        comments: currentFeedback.comments,
+      }
+      // { keepDefaultValues: false }
+    );
+  }, []);
 
   const onSubmit = (formData) => {
     const newFeedbackItem = {
-      id: data.productRequests.length + 1,
-      title: formData["feedback-title"],
+      id: formData.id,
+      title: watch("feedback-title"),
       category: formData.category,
-      upvotes: 0,
-      status: "suggestion",
-      description: formData["feedback-comment"],
-      comments: [],
+      upvotes: formData.upvotes,
+      status: formData.status,
+      description: watch("feedback-comment"),
+      comments: formData.comments,
     };
 
+    const feedbackIndex = data.productRequests.indexOf(currentFeedback);
+
     setData((prevData) => {
+      const newProductRequests = [
+        ...prevData.productRequests.slice(0, feedbackIndex),
+        newFeedbackItem,
+        ...prevData.productRequests.slice(feedbackIndex + 1),
+      ];
+
       return {
         ...prevData,
-        productRequests: [...prevData.productRequests, newFeedbackItem],
+        productRequests: newProductRequests,
       };
     });
     navigate("/feedbacks");
@@ -61,9 +111,8 @@ export default function EditFeedback() {
           />
           <h1 id="form-title">Create New Feedback</h1>
           <FeedbackTitle register={register} errors={errors} />
-          <Category />
-          <UpdateStatus />
-          {/* here should be the value of previous feedback*/}
+          <Category setValue={setValue} category={category} />
+          <UpdateStatus setValue={setValue} />
           <FdbckComment register={register} errors={errors} />
           <BtnContainer>
             <div className="buttons-flex-group"></div>
