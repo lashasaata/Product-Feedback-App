@@ -8,7 +8,6 @@ function Feedback() {
   const id = params.id;
   const map0 = new Map(Object.entries(context.data));
   const map1 = new Map(Object.entries(context.data.productRequests[id - 1]));
-  // console.log(map1);
 
   const choosen = context.data.productRequests[id - 1];
   const choosenClon = { ...choosen };

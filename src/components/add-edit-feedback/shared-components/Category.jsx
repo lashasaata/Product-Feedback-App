@@ -6,12 +6,9 @@ import ArrowDown from "/assets/shared/icon-arrow-down.svg";
 import CheckIcon from "/assets/shared/icon-check.svg";
 import { MyContext } from "../../../App";
 import { useContext } from "react";
-import { useLocation } from "react-router";
 
-export default function Category({ setValue, category }) {
-  const pathname = useLocation().pathname.split("/").at(-1);
-
-  const allCategories = ["feature", "UI", "UX", "enhancement", "bug", "Other"];
+export default function Category() {
+  const allCategories = ["Feature", "UI", "UX", "Enhancement", "Bug", "Other"];
 
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(allCategories[0]);
@@ -25,20 +22,16 @@ export default function Category({ setValue, category }) {
       }
     };
 
-    if (pathname === "edit-feedback") {
-      setSelectedOption(category);
-    }
-
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const toggleDropdown = () => setIsOpen((state) => !state);
+  const toggleDropdown = () => setIsOpen(!isOpen);
 
   const handleSelection = (option) => {
     setSelectedOption(option);
+    onSelectCategory(option); // pass selected option to parent's handler
     setIsOpen(false);
-    setValue("category", option);
   };
 
   return (
