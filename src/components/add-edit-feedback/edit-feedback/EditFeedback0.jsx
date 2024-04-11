@@ -25,7 +25,7 @@ export default function EditFeedback() {
     (item) => item.id === Number(currFeedbackId)
   );
 
-  const { search } = location;
+  const category = currentFeedback.category;
 
   const {
     register,
@@ -35,15 +35,15 @@ export default function EditFeedback() {
     reset,
     watch,
   } = useForm({
-    // defaultValues: {
-    //   id: currentFeedback.id,
-    //   title: currentFeedback.title,
-    //   category: currentFeedback.category,
-    //   upvotes: currentFeedback.upvotes,
-    //   status: currentFeedback.status,
-    //   description: currentFeedback.description,
-    //   comments: currentFeedback.comments,
-    // },
+    defaultValues: {
+      id: currentFeedback.id,
+      title: currentFeedback.title,
+      category: currentFeedback.category,
+      upvotes: currentFeedback.upvotes,
+      status: currentFeedback.status,
+      description: currentFeedback.description,
+      comments: currentFeedback.comments,
+    },
   });
 
   console.log(currentFeedback.category);
@@ -65,13 +65,13 @@ export default function EditFeedback() {
 
   const onSubmit = (formData) => {
     const newFeedbackItem = {
-      id: currentFeedback.id,
+      id: formData.id,
       title: watch("feedback-title"),
-      category: watch("category"),
-      upvotes: currentFeedback.upvotes,
-      status: watch("status"),
+      category: formData.category,
+      upvotes: formData.upvotes,
+      status: formData.status,
       description: watch("feedback-comment"),
-      comments: currentFeedback.comments,
+      comments: formData.comments,
     };
 
     const feedbackIndex = data.productRequests.indexOf(currentFeedback);
@@ -111,7 +111,7 @@ export default function EditFeedback() {
           />
           <h1 id="form-title">Create New Feedback</h1>
           <FeedbackTitle register={register} errors={errors} />
-          <Category setValue={setValue} />
+          <Category setValue={setValue} category={category} />
           <UpdateStatus setValue={setValue} />
           <FdbckComment register={register} errors={errors} />
           <BtnContainer>
