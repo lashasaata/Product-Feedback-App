@@ -74,6 +74,7 @@ function Feedback() {
       const updatedData = Object.fromEntries(map0);
       // context.setData(updatedData);
       // console.log(context.data);
+      setUseReply(reply0());
       setCommentValue("");
       setCommentError(true);
       setCharLength(250);
@@ -84,22 +85,9 @@ function Feedback() {
       setValidation(false);
     }
   };
+
   console.log(choosen);
-  // const [useReply, setUseReply] = useState(
-  //   choosen.comments.map((e) => {
-  //     return {
-  //        reply: false
-  //       if(choosen.comments.replies){
-  //         choosen.comments.replies.map(() => {
-  //           return {
-  //             reply: false
-  //           }
-  //         })
-  //       }
-  //       };
-  //   })
-  // );
-  const [useReply, setUseReply] = useState(() => {
+  const reply0 = () => {
     return choosen.comments.map((comment) => {
       const replyArray = comment.replies
         ? comment.replies.map(() => ({ reply: false }))
@@ -109,42 +97,21 @@ function Feedback() {
         replies: replyArray,
       };
     });
-  });
-  console.log(useReply);
-  const handleReply = (index0, index) => {
-    if (index || index == 0) {
-      useReply[index0].replies[index].reply =
-        !useReply[index0].replies[index].reply;
-      console.log(useReply[index0].replies[index].reply);
-    } else {
-      useReply[index0].reply = !useReply[index0].reply;
-    }
-
-    console.log(useReply);
-    console.log(index);
-    console.log(index0);
   };
-  // const handleReply = (childIndex, parentIndex) => {
-  //   setUseReply((childIndex, parentIndex) =>
-  //     useReply.map((e, index) => {
-  //         return {
-  //           if (childIndex) {
-  //             e.replies.map((e) => {
-  //               return {
-  //                 ...e,
-  //                 reply: !e.reply,
-  //               };
-  //             })}else{
-  //                 return {
-  //                   ...item,
-  //                   reply: !item.reply,
-  //                 }
-  //             }
 
-  //         };
-  //     })
-  //   );
-  // };
+  const [useReply, setUseReply] = useState(reply0());
+
+  const handleReply = (index0, index) => {
+    let useReplyC = [...useReply];
+    if (index || index == 0) {
+      useReplyC[index0].replies[index].reply =
+        !useReplyC[index0].replies[index].reply;
+    } else {
+      useReplyC[index0].reply = !useReplyC[index0].reply;
+    }
+    setUseReply(useReplyC);
+  };
+
   return (
     <div className="bg-[#f7f8fd] flex flex-col items-center gap-6">
       <header className="w-[327px] md:w-[689px] xl:w-[730px] flex items-center justify-between mt-6 xl:mt-10">
