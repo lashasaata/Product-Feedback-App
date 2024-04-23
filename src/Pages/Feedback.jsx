@@ -103,12 +103,20 @@ function Feedback() {
 
   const handleReply = (index0, index) => {
     let useReplyC = [...useReply];
+    // it checks if any reply area is open, if yes closes them and opens only clicked one
     if (index || index == 0) {
+      if (!useReplyC[index0].replies[index].reply) {
+        useReplyC = reply0();
+      }
       useReplyC[index0].replies[index].reply =
         !useReplyC[index0].replies[index].reply;
     } else {
+      if (!useReplyC[index0].reply) {
+        useReplyC = reply0();
+      }
       useReplyC[index0].reply = !useReplyC[index0].reply;
     }
+
     setUseReply(useReplyC);
   };
 
