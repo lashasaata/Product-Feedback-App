@@ -1,6 +1,6 @@
 import ArrowUp from "/assets/shared/icon-arrow-up.svg";
 import Comments from "/assets/shared/icon-comments.svg";
-import { MyContext } from "../App";
+import { MyContext } from "../../App";
 import { useContext } from "react";
 
 export default function Feedback({ feedback, onClick, isUpvoted }) {
