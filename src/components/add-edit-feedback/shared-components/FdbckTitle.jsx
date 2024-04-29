@@ -12,10 +12,11 @@ export default function FeedbackTitle({ register, errors }) {
           errors["feedback-title"] ? "error" : ""
         }`}
         type="text"
-        name="feedback-headline"
+        name="feedback-title"
         id="feedback-headline"
         {...register("feedback-title", { required: "Can’t be empty" })}
       />
+
       {errors["feedback-title"] && (
         <ErrorMessage>{errors["feedback-title"].message}</ErrorMessage>
       )}

@@ -8,7 +8,6 @@ function Feedback() {
   const id = params.id;
   const map0 = new Map(Object.entries(context.data));
   const map1 = new Map(Object.entries(context.data.productRequests[id - 1]));
-  // console.log(map1);
 
   const choosen = context.data.productRequests[id - 1];
   const choosenClon = { ...choosen };
@@ -127,15 +126,13 @@ function Feedback() {
           <img src="/assets/shared/icon-arrow-left.svg" alt="arrow_icon" />
           <span
             onClick={() => context.navigate("/feedbacks")}
-            className="text-[13px] md:text-sm text-[#647196] font-[700]"
-          >
+            className="text-[13px] md:text-sm text-[#647196] font-[700]">
             Go Back
           </span>
         </div>
         <button
           onClick={() => context.navigate(`/feedbacks/${id}/edit-feedback`)}
-          className="w-[119px] md:w-[142px] h-10 md:h-11 rounded-[10px] bg-[#4661e6] text-[13px] md:text-sm text-[#f2f4fe] font-[700] hover:bg-[#7c91f9] hover:cursor-pointer"
-        >
+          className="w-[119px] md:w-[142px] h-10 md:h-11 rounded-[10px] bg-[#4661e6] text-[13px] md:text-sm text-[#f2f4fe] font-[700] hover:bg-[#7c91f9] hover:cursor-pointer">
           Edit Feedback
         </button>
       </header>
@@ -196,8 +193,7 @@ function Feedback() {
                       index0 < choosen.comments.length - 1
                         ? "border-b border-solid border-[ #8c92b3]"
                         : ""
-                    } flex flex-col md:w-[625px] xl:w-[667px] md:flex-row gap-6 md:gap-[5px]`}
-                  >
+                    } flex flex-col md:w-[625px] xl:w-[667px] md:flex-row gap-6 md:gap-[5px]`}>
                     {e.replies ? (
                       <div className="hidden md:flex md:flex-col md:items-center md:w-10 md:gap-[12px]">
                         <img
@@ -269,8 +265,7 @@ function Feedback() {
                               return (
                                 <div
                                   key={index}
-                                  className="flex flex-col pb-6 md:pb-[17px]"
-                                >
+                                  className="flex flex-col pb-6 md:pb-[17px]">
                                   <div className="flex items-center justify-between">
                                     <div className="flex items-center gap-4 md:gap-[32px]">
                                       <img
@@ -300,7 +295,7 @@ function Feedback() {
                                     </span>{" "}
                                     {e.content}
                                   </p>
-                                  {useReply[index0].replies[index].reply ? (
+                {useReply[index0].replies[index].reply ? (
                                     <section className="flex items-start justify-between mt-5 md:ml-[72px]">
                                       <textarea
                                         className="w-[175px] md:w-[350px] xl:w-[400px] h-[60px] md:h-[90px] bg-[#f7f8fd] rounded-[5px] outline-none resize-none p-2 md:p-3 text-[13px] md:text-sm text-[#3a4374] font-[400] hover:cursor-pointer hover:border hover:border-solid hover:border-[#4661e6]"
@@ -364,8 +359,7 @@ function Feedback() {
           </p>
           <button
             onClick={commentPost}
-            className="w-[119px] md:w-[142px] h-10 md:h-[44px] bg-[#ad1fea] rounded-[10px] text-[13px] md:text-sm text-[#f2f4fe] font-[700] hover:bg-[#c75af6] hover:cursor-pointer"
-          >
+            className="w-[119px] md:w-[142px] h-10 md:h-[44px] bg-[#ad1fea] rounded-[10px] text-[13px] md:text-sm text-[#f2f4fe] font-[700] hover:bg-[#c75af6] hover:cursor-pointer">
             Post Comment
           </button>
         </div>
