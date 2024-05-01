@@ -48,6 +48,8 @@ export default function NewFeedback() {
         productRequests: [...prevData.productRequests, newFeedbackItem],
       };
     });
+
+    console.log(data);
     navigate("/feedbacks");
 
     // console.log("Form submitted:", formData);

@@ -49,6 +49,9 @@ function Feedback() {
     }
   };
 
+  // console.log(commentError);
+  // console.log(charLength);
+
   const commentPost = () => {
     if (!Array.isArray(choosenClon.comments)) {
       choosenClon.comments = [];
@@ -235,8 +238,7 @@ function Feedback() {
                           </div>
                           <span
                             onClick={() => handleReply(index0)}
-                            className="text-[13px] text-[#4661e6] font-[600] hover:underline hover:cursor-pointer"
-                          >
+                            className="text-[13px] text-[#4661e6] font-[600] hover:underline hover:cursor-pointer">
                             Reply
                           </span>
                         </div>
@@ -284,8 +286,7 @@ function Feedback() {
                                     </div>
                                     <span
                                       onClick={() => handleReply(index0, index)}
-                                      className="text-[13px] text-[#4661e6] font-[600] hover:underline hover:cursor-pointer"
-                                    >
+                                      className="text-[13px] text-[#4661e6] font-[600] hover:underline hover:cursor-pointer">
                                       Reply
                                     </span>
                                   </div>
@@ -295,7 +296,7 @@ function Feedback() {
                                     </span>{" "}
                                     {e.content}
                                   </p>
-                {useReply[index0].replies[index].reply ? (
+                                  {useReply[index0].replies[index].reply ? (
                                     <section className="flex items-start justify-between mt-5 md:ml-[72px]">
                                       <textarea
                                         className="w-[175px] md:w-[350px] xl:w-[400px] h-[60px] md:h-[90px] bg-[#f7f8fd] rounded-[5px] outline-none resize-none p-2 md:p-3 text-[13px] md:text-sm text-[#3a4374] font-[400] hover:cursor-pointer hover:border hover:border-solid hover:border-[#4661e6]"
@@ -303,8 +304,7 @@ function Feedback() {
                                         name=""
                                         id=""
                                         cols="30"
-                                        rows="10"
-                                      ></textarea>
+                                        rows="10"></textarea>
                                       <button className="w-[70px] md:w-[100px] h-[28px] md:h-[35px] rounded-[10px] bg-[#ad1fea] text-[13px] md:text-sm text-[#f2f4fe] font-[700] hover:bg-[#c75af6] hover:cursor-pointer">
                                         Post Reply
                                       </button>
