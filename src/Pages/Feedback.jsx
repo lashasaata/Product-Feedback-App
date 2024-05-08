@@ -1,21 +1,28 @@
 import { useParams } from "react-router";
 import { useState, useContext } from "react";
 import { MyContext } from "../App";
+
 function Feedback() {
   const context = useContext(MyContext);
   const params = useParams();
+  // console.log(params);
   let productRequests = context.data.productRequests;
-  const id = params.id;
-  const map0 = new Map(Object.entries(context.data));
-  const map1 = new Map(Object.entries(context.data.productRequests[id - 1]));
+  const id = parseFloat(params.id);
 
-  const choosen = context.data.productRequests[id - 1];
-  const choosenClon = { ...choosen };
+  // const map0 = new Map(Object.entries(context.data));
+  // const map1 = new Map(Object.entries(context.data.productRequests[id - 1]));
+  // const choosenClon = { ...feedback };
+
+  // console.log(context.data.productRequests);
+
+  const feedback = context.data.productRequests.find(
+    (feedback) => feedback.id === id
+  );
 
   let commentsAmout = 0;
-  if (choosen.comments) {
-    commentsAmout = commentsAmout + choosen.comments.length;
-    choosen.comments.map((e) => {
+  if (feedback.comments) {
+    commentsAmout = commentsAmout + feedback.comments.length;
+    feedback.comments.map((e) => {
       if (e.replies) {
         return (commentsAmout = commentsAmout + e.replies.length);
       } else {
@@ -49,12 +56,15 @@ function Feedback() {
     }
   };
 
+  // console.log(commentError);
+  // console.log(charLength);
+
   const commentPost = () => {
-    if (!Array.isArray(choosenClon.comments)) {
-      choosenClon.comments = [];
+    if (!Array.isArray(feedback.comments)) {
+      feedback.comments = [];
     }
     if (!commentError) {
-      choosenClon.comments.push({
+      feedback.comments.push({
         id: countId,
         content: commentValue,
         user: {
@@ -64,13 +74,13 @@ function Feedback() {
         },
       });
       setCountId(countId + 1);
-      map1.set("comments", choosenClon.comments);
+      productRequests.set("comments", feedback.comments);
 
-      const updatedObj = Object.fromEntries(map1);
+      const updatedObj = Object.fromEntries(productRequests);
       productRequests = [...productRequests][id - 1] = updatedObj;
       // console.log(productRequests);
-      map0.set("productRequests", productRequests);
-      const updatedData = Object.fromEntries(map0);
+      productRequests.set("productRequests", productRequests);
+      const updatedData = Object.fromEntries(productRequests);
       // context.setData(updatedData);
       // console.log(context.data);
       setUseReply(reply0());
@@ -85,9 +95,8 @@ function Feedback() {
     }
   };
 
-  console.log(choosen);
   const reply0 = () => {
-    return choosen.comments.map((comment) => {
+    return feedback.comments.map((comment) => {
       const replyArray = comment.replies
         ? comment.replies.map(() => ({ reply: false }))
         : [];
@@ -141,19 +150,19 @@ function Feedback() {
           <div className="hidden md:flex w-[69px] md:w-10 h-[32px] md:h-[53px] rounded-[10px] bg-[#f2f4fe] flex md:flex-col items-center justify-center gap-[10px] md:gap-2 hover:bg-[#cfd7ff] hover:cursor-pointer">
             <img src="/assets/shared/icon-arrow-up.svg" alt="arrow_icon" />
             <span className="text-[13px] text-[#3a4374] font-[700] tracking-[-0.18px]">
-              {choosen.upvotes}
+              {feedback.upvotes}
             </span>
           </div>
           <div>
             <h1 className="text-[13px] md:text-lg text-[#3a4374] tracking-[-0.18px] md:tracking-[-0.25px] font-[700]">
-              {choosen.title}
+              {feedback.title}
             </h1>
             <p className="text-[13px] md:text-base text-[#647196] font-[400] mt-[9px] md:mt-1">
-              {choosen.description}
+              {feedback.description}
             </p>
             <div className="w-[87px] h-[30px] bg-[#f2f4ff] flex items-center justify-center rounded-[10px] mt-[10px] md:mt-3">
               <span className="text-[13px] text-[#4661e6] font-[600]">
-                {choosen.category}
+                {feedback.category}
               </span>
             </div>
           </div>
@@ -168,7 +177,7 @@ function Feedback() {
           <div className="w-[69px] h-[32px] rounded-[10px] bg-[#f2f4fe] flex items-center justify-center gap-[10px]">
             <img src="/assets/shared/icon-arrow-up.svg" alt="arrow_icon" />
             <span className="text-[13px] text-[#3a4374] font-[700] tracking-[-0.18px]">
-              {choosen.upvotes}
+              {feedback.upvotes}
             </span>
           </div>
           <div className="flex items-center gap-1">
@@ -184,13 +193,13 @@ function Feedback() {
           <span>{commentsAmout}</span> Comments
         </h1>
         <div className="flex flex-col gap-6 md:gap-[32px]">
-          {choosen.comments
-            ? choosen.comments.map((e, index0) => {
+          {feedback.comments
+            ? feedback.comments.map((e, index0) => {
                 return (
                   <div
                     key={e.id}
                     className={`${
-                      index0 < choosen.comments.length - 1
+                      index0 < feedback.comments.length - 1
                         ? "border-b border-solid border-[ #8c92b3]"
                         : ""
                     } flex flex-col md:w-[625px] xl:w-[667px] md:flex-row gap-6 md:gap-[5px]`}>
@@ -235,8 +244,7 @@ function Feedback() {
                           </div>
                           <span
                             onClick={() => handleReply(index0)}
-                            className="text-[13px] text-[#4661e6] font-[600] hover:underline hover:cursor-pointer"
-                          >
+                            className="text-[13px] text-[#4661e6] font-[600] hover:underline hover:cursor-pointer">
                             Reply
                           </span>
                         </div>
@@ -284,8 +292,7 @@ function Feedback() {
                                     </div>
                                     <span
                                       onClick={() => handleReply(index0, index)}
-                                      className="text-[13px] text-[#4661e6] font-[600] hover:underline hover:cursor-pointer"
-                                    >
+                                      className="text-[13px] text-[#4661e6] font-[600] hover:underline hover:cursor-pointer">
                                       Reply
                                     </span>
                                   </div>
@@ -295,7 +302,7 @@ function Feedback() {
                                     </span>{" "}
                                     {e.content}
                                   </p>
-                {useReply[index0].replies[index].reply ? (
+                                  {useReply[index0].replies[index].reply ? (
                                     <section className="flex items-start justify-between mt-5 md:ml-[72px]">
                                       <textarea
                                         className="w-[175px] md:w-[350px] xl:w-[400px] h-[60px] md:h-[90px] bg-[#f7f8fd] rounded-[5px] outline-none resize-none p-2 md:p-3 text-[13px] md:text-sm text-[#3a4374] font-[400] hover:cursor-pointer hover:border hover:border-solid hover:border-[#4661e6]"
@@ -303,8 +310,7 @@ function Feedback() {
                                         name=""
                                         id=""
                                         cols="30"
-                                        rows="10"
-                                      ></textarea>
+                                        rows="10"></textarea>
                                       <button className="w-[70px] md:w-[100px] h-[28px] md:h-[35px] rounded-[10px] bg-[#ad1fea] text-[13px] md:text-sm text-[#f2f4fe] font-[700] hover:bg-[#c75af6] hover:cursor-pointer">
                                         Post Reply
                                       </button>

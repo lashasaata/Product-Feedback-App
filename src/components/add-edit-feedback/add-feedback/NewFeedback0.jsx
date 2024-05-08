@@ -10,8 +10,11 @@ import CancelButton from "../shared-components/buttons/CancelBtn";
 import { useForm } from "react-hook-form";
 import { MyContext } from "../../../App";
 import { useContext } from "react";
+import uuid from "react-uuid";
 
 export default function NewFeedback() {
+  // const id = uuid();
+
   const { navigate, setData, data } = useContext(MyContext);
 
   const {
@@ -24,7 +27,7 @@ export default function NewFeedback() {
       category: "Feature",
       comments: [],
       description: "",
-      id: Math.random(),
+      id: "",
       status: "suggestion",
       title: "",
       upvote: 0,
@@ -33,13 +36,13 @@ export default function NewFeedback() {
 
   const onSubmit = (formData) => {
     const newFeedbackItem = {
-      id: Math.random(),
-      title: formData["feedback-title"],
       category: formData.category,
-      upvotes: 0,
-      status: "suggestion",
-      description: formData["feedback-comment"],
       comments: [],
+      description: formData["feedback-comment"],
+      id: Math.random(),
+      status: "suggestion",
+      title: formData["feedback-title"],
+      upvotes: 0,
     };
 
     setData((prevData) => {
