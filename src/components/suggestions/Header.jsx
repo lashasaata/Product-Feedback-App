@@ -4,7 +4,7 @@ import Close from "/assets/shared/mobile/icon-close.svg";
 import ArrowDown from "/assets/shared/icon-arrow-down.svg";
 import ArrowUp from "/assets/shared/icon-arrow-up.svg";
 import SuggestionImg from "/assets/suggestions/icon-suggestions.svg";
-import { MyContext } from "../App";
+import { MyContext } from "../../App";
 import { useContext } from "react";
 
 export default function Header({
@@ -29,7 +29,7 @@ export default function Header({
   const context = useContext(MyContext);
   return (
     <header className="md:flex md:flex-col md:gap-[40px]">
-      <div className="headerImg w-full flex justify-between items-center  py-4 px-6 md:bg-none  md:bg-slate-100 lg:flex-col lg:gap-4">
+      <div className="headerImg w-full flex gap-2 justify-between items-center  py-4 px-6 md:bg-none lg:flex-col lg:gap-4">
         <div className="titleBackground md:w-[223px] md:h-[178px] md:p-6 rounded-lg md:flex md:flex-col md:justify-end">
           <p className="text-base font-bold tracking-tight text-white md:text-xl">
             Frontend Mentor

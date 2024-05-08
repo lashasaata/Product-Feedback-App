@@ -7,7 +7,7 @@ import Category from "./Category";
 import Feedback from "./Feedback0";
 import EmptyFeedbacks from "./EmptyFeedbacks";
 import Header from "./Header";
-import { MyContext } from "../App";
+import { MyContext } from "../../App";
 
 export default function Feedbacks() {
   const context = useContext(MyContext);
@@ -97,7 +97,7 @@ export default function Feedbacks() {
   };
 
   return (
-    <div className="md:bg-slate-100 md:px-[39px] md:py-[56px] md:flex md:flex-col md:gap-6 lg:flex-row lg:px-[165px] lg:py-[96px]">
+    <div className=" md:px-[39px] md:py-[56px] md:flex md:flex-col md:gap-6 lg:flex-row lg:px-[165px] lg:py-[96px]">
       <Header
         sidebarVisible={sidebarVisible}
         setSidebarVisible={setSidebarVisible}
@@ -251,7 +251,7 @@ export default function Feedbacks() {
         </div>
 
         <main
-          className="bg-slate-100 p-6 flex gap-4 flex-col md:p-0"
+          className="p-6 flex gap-4 flex-col md:p-0"
           style={{ opacity: opacity }}
         >
           {seggestedFeedbacks.length === 0 ? (
