@@ -5,15 +5,9 @@ import { MyContext } from "../App";
 function Feedback() {
   const context = useContext(MyContext);
   const params = useParams();
-  // console.log(params);
+
   let productRequests = context.data.productRequests;
   const id = parseFloat(params.id);
-
-  // const map0 = new Map(Object.entries(context.data));
-  // const map1 = new Map(Object.entries(context.data.productRequests[id - 1]));
-  // const choosenClon = { ...feedback };
-
-  // console.log(context.data.productRequests);
 
   const feedback = context.data.productRequests.find(
     (feedback) => feedback.id === id
@@ -79,7 +73,6 @@ function Feedback() {
       const updatedObj = Object.fromEntries(productRequests);
       productRequests = [...productRequests][id - 1] = updatedObj;
       // console.log(productRequests);
-      // productRequests.productRequests = productRequests;
 
       // context.setData(updatedData);
       // console.log(context.data);
