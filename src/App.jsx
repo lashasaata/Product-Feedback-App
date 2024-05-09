@@ -6,13 +6,20 @@ import Feedback from "./Pages/Feedback";
 import NewFeedback from "./Pages/NewFeedback";
 import EditFeedback from "./Pages/EditFeedback";
 import Roadmap from "./Pages/Roadmap";
-
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 export const MyContext = createContext(null);
 
 function App() {
-  const [data, setData] = useState(datajson);
+  const storedData = JSON.parse(localStorage.getItem("data"));
+
+  const [data, setData] = useState(storedData);
+
+  useEffect(() => {
+    localStorage.setItem("data", JSON.stringify(data));
+  }, [data]);
+
   const navigate = useNavigate();
+
   return (
     <>
       <MyContext.Provider
