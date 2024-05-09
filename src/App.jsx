@@ -12,7 +12,7 @@ export const MyContext = createContext(null);
 function App() {
   const storedData = JSON.parse(localStorage.getItem("data"));
 
-  const [data, setData] = useState(storedData);
+  const [data, setData] = useState(storedData || datajson);
 
   useEffect(() => {
     localStorage.setItem("data", JSON.stringify(data));
