@@ -5,13 +5,19 @@ import { MyContext } from "../App";
 function Feedback() {
   const context = useContext(MyContext);
   const params = useParams();
-
   let productRequests = context.data.productRequests;
   const id = parseFloat(params.id);
+  // const map0 = new Map(Object.entries(context.data));
+  // const map1 = new Map(Object.entries(context.data.productRequests[id - 1]));
+  // const choosenClon = { ...feedback };
 
+  // console.log(context.data.productRequests);
+  const user = context.data.currentUser;
   const feedback = context.data.productRequests.find(
     (feedback) => feedback.id === id
   );
+  // console.log(feedback);
+  // const [feedback, setFeedback] = useState(feedback0);
 
   let commentsAmout = 0;
   if (feedback.comments) {
@@ -34,6 +40,7 @@ function Feedback() {
   const handleChange = (e) => {
     handleComment(e), inputHandler(e);
   };
+
   const handleComment = (e) => {
     if (charLength > 0) {
       setCommentValue(e.target.value);
@@ -42,6 +49,7 @@ function Feedback() {
       setCharLength(charLength);
     }
   };
+
   const inputHandler = (e) => {
     if (250 - e.target.value.length == "250") {
       setCommentError(true);
@@ -49,9 +57,6 @@ function Feedback() {
       setCommentError(false);
     }
   };
-
-  // console.log(commentError);
-  // console.log(charLength);
 
   const commentPost = () => {
     if (!Array.isArray(feedback.comments)) {
@@ -72,10 +77,7 @@ function Feedback() {
 
       const updatedObj = Object.fromEntries(productRequests);
       productRequests = [...productRequests][id - 1] = updatedObj;
-      // console.log(productRequests);
 
-      // context.setData(updatedData);
-      // console.log(context.data);
       setUseReply(reply0());
       setCommentValue("");
       setCommentError(true);
@@ -88,6 +90,7 @@ function Feedback() {
     }
   };
 
+  // this function resets or sets(firstly) reply areas deployement
   const reply0 = () => {
     return feedback.comments.map((comment) => {
       const replyArray = comment.replies
@@ -121,6 +124,78 @@ function Feedback() {
     setUseReply(useReplyC);
   };
 
+  // reply text value
+  const [replyText, setReplyText] = useState("");
+  const [replyError, setReplyError] = useState(true);
+  const [replyValidation, setReplyValidation] = useState(false);
+
+  const replyTextHandler = (e) => {
+    setReplyText(e.target.value);
+    const replacedValue = e.target.value.replaceAll(" ", "");
+    const textLength = replacedValue.length;
+    if (textLength == 0) {
+      setReplyError(true);
+    } else {
+      setReplyError(false);
+    }
+  };
+
+  // post reply text
+  const postReply = (index0, index) => {
+    //this part finds username to reply for
+    let replyTo = "";
+    if (index || index == 0) {
+      replyTo = feedback.comments[index0].replies[index].user.username;
+    } else {
+      replyTo = feedback.comments[index0].user.username;
+    }
+    // this part sets new reply
+    if (replyError) {
+      setReplyValidation(true);
+    } else {
+      let userImage = user.image;
+      let userName = user.name;
+      let userUsername = user.username;
+      let updatedFeedback = feedback;
+      let text = replyText;
+      // idk why it is working but ...
+      const useReplyClone = { ...useReply };
+      const updatedUseReply = useReplyClone[index0].replies.push({
+        reply: false,
+      });
+      // if comment has replies it just adds another, unless it creates new and adds
+      if (updatedFeedback.comments[index0].replies) {
+        updatedFeedback.comments[index0].replies.push({
+          content: text,
+          replyingTo: replyTo,
+          user: {
+            image: userImage,
+            name: userName,
+            username: userUsername,
+          },
+        });
+      } else {
+        updatedFeedback.comments[index0] = {
+          ...updatedFeedback.comments[index0],
+          ["replies"]: [],
+        };
+        updatedFeedback.comments[index0].replies.push({
+          content: text,
+          replyingTo: replyTo,
+          user: {
+            image: userImage,
+            name: userName,
+            username: userUsername,
+          },
+        });
+      }
+      //resets text value, validation, and closes reply areas
+      setUseReply(reply0());
+      setReplyText("");
+      setReplyValidation(false);
+    }
+  };
+
   return (
     <div className="bg-[#f7f8fd] flex flex-col items-center gap-6">
       <header className="w-[327px] md:w-[689px] xl:w-[730px] flex items-center justify-between mt-6 xl:mt-10">
@@ -128,13 +203,15 @@ function Feedback() {
           <img src="/assets/shared/icon-arrow-left.svg" alt="arrow_icon" />
           <span
             onClick={() => context.navigate("/feedbacks")}
-            className="text-[13px] md:text-sm text-[#647196] font-[700]">
+            className="text-[13px] md:text-sm text-[#647196] font-[700]"
+          >
             Go Back
           </span>
         </div>
         <button
           onClick={() => context.navigate(`/feedbacks/${id}/edit-feedback`)}
-          className="w-[119px] md:w-[142px] h-10 md:h-11 rounded-[10px] bg-[#4661e6] text-[13px] md:text-sm text-[#f2f4fe] font-[700] hover:bg-[#7c91f9] hover:cursor-pointer">
+          className="w-[119px] md:w-[142px] h-10 md:h-11 rounded-[10px] bg-[#4661e6] text-[13px] md:text-sm text-[#f2f4fe] font-[700] hover:bg-[#7c91f9] hover:cursor-pointer"
+        >
           Edit Feedback
         </button>
       </header>
@@ -195,7 +272,8 @@ function Feedback() {
                       index0 < feedback.comments.length - 1
                         ? "border-b border-solid border-[ #8c92b3]"
                         : ""
-                    } flex flex-col md:w-[625px] xl:w-[667px] md:flex-row gap-6 md:gap-[5px]`}>
+                    } flex flex-col md:w-[625px] xl:w-[667px] md:flex-row gap-6 md:gap-[5px]`}
+                  >
                     {e.replies ? (
                       <div className="hidden md:flex md:flex-col md:items-center md:w-10 md:gap-[12px]">
                         <img
@@ -237,7 +315,8 @@ function Feedback() {
                           </div>
                           <span
                             onClick={() => handleReply(index0)}
-                            className="text-[13px] text-[#4661e6] font-[600] hover:underline hover:cursor-pointer">
+                            className="text-[13px] text-[#4661e6] font-[600] hover:underline hover:cursor-pointer"
+                          >
                             Reply
                           </span>
                         </div>
@@ -247,10 +326,18 @@ function Feedback() {
                         {useReply[index0].reply ? (
                           <section className="flex items-start justify-between mt-5 xl:mt-6">
                             <textarea
+                              onChange={replyTextHandler}
                               placeholder="Type your comment here"
-                              className="w-[190px] md:w-[400px] xl:w-[421px] h-[60px] md:h-[95px] bg-[#f7f8fd] rounded-[5px] outline-none resize-none p-2 md:p-3  text-[13px] md:text-[15px] text-[#3a4374] font-[400] hover:cursor-pointer hover:border hover:border-solid hover:border-[#4661e6]"
+                              className={`${
+                                replyError && replyValidation
+                                  ? "border border-solid border-[#d73737]"
+                                  : "border-none"
+                              } w-[190px] md:w-[400px] xl:w-[421px] h-[60px] md:h-[95px] bg-[#f7f8fd] rounded-[5px] outline-none resize-none p-2 md:p-3  text-[13px] md:text-[15px] text-[#3a4374] font-[400] hover:cursor-pointer hover:border hover:border-solid hover:border-[#4661e6]`}
                             />
-                            <button className="w-[80px] md:w-[117px] h-[28px] md:h-10 xl:h-11 rounded-[10px] bg-[#ad1fea] text-[13px] xl:text-sm text-[#f2f4fe] font-[700] hover:bg-[#c75af6] hover:cursor-pointer">
+                            <button
+                              onClick={() => postReply(index0)}
+                              className="w-[80px] md:w-[117px] h-[28px] md:h-10 xl:h-11 rounded-[10px] bg-[#ad1fea] text-[13px] xl:text-sm text-[#f2f4fe] font-[700] hover:bg-[#c75af6] hover:cursor-pointer"
+                            >
                               Post Reply
                             </button>
                           </section>
@@ -266,7 +353,8 @@ function Feedback() {
                               return (
                                 <div
                                   key={index}
-                                  className="flex flex-col pb-6 md:pb-[17px]">
+                                  className="flex flex-col pb-6 md:pb-[17px]"
+                                >
                                   <div className="flex items-center justify-between">
                                     <div className="flex items-center gap-4 md:gap-[32px]">
                                       <img
@@ -285,7 +373,8 @@ function Feedback() {
                                     </div>
                                     <span
                                       onClick={() => handleReply(index0, index)}
-                                      className="text-[13px] text-[#4661e6] font-[600] hover:underline hover:cursor-pointer">
+                                      className="text-[13px] text-[#4661e6] font-[600] hover:underline hover:cursor-pointer"
+                                    >
                                       Reply
                                     </span>
                                   </div>
@@ -298,13 +387,20 @@ function Feedback() {
                                   {useReply[index0].replies[index].reply ? (
                                     <section className="flex items-start justify-between mt-5 md:ml-[72px]">
                                       <textarea
-                                        className="w-[175px] md:w-[350px] xl:w-[400px] h-[60px] md:h-[90px] bg-[#f7f8fd] rounded-[5px] outline-none resize-none p-2 md:p-3 text-[13px] md:text-sm text-[#3a4374] font-[400] hover:cursor-pointer hover:border hover:border-solid hover:border-[#4661e6]"
+                                        onChange={replyTextHandler}
+                                        value={replyText}
+                                        className={`${
+                                          replyError && replyValidation
+                                            ? "border border-solid border-[#d73737]"
+                                            : "border-none"
+                                        } w-[175px] md:w-[350px] xl:w-[400px] h-[60px] md:h-[90px] bg-[#f7f8fd] rounded-[5px] outline-none resize-none p-2 md:p-3 text-[13px] md:text-sm text-[#3a4374] font-[400] hover:cursor-pointer hover:border hover:border-solid hover:border-[#4661e6]`}
                                         placeholder="Type your comment here"
-                                        name=""
-                                        id=""
-                                        cols="30"
-                                        rows="10"></textarea>
-                                      <button className="w-[70px] md:w-[100px] h-[28px] md:h-[35px] rounded-[10px] bg-[#ad1fea] text-[13px] md:text-sm text-[#f2f4fe] font-[700] hover:bg-[#c75af6] hover:cursor-pointer">
+                                        type="text"
+                                      />
+                                      <button
+                                        onClick={() => postReply(index0, index)}
+                                        className="w-[70px] md:w-[100px] h-[28px] md:h-[35px] rounded-[10px] bg-[#ad1fea] text-[13px] md:text-sm text-[#f2f4fe] font-[700] hover:bg-[#c75af6] hover:cursor-pointer"
+                                      >
                                         Post Reply
                                       </button>
                                     </section>
@@ -358,7 +454,8 @@ function Feedback() {
           </p>
           <button
             onClick={commentPost}
-            className="w-[119px] md:w-[142px] h-10 md:h-[44px] bg-[#ad1fea] rounded-[10px] text-[13px] md:text-sm text-[#f2f4fe] font-[700] hover:bg-[#c75af6] hover:cursor-pointer">
+            className="w-[119px] md:w-[142px] h-10 md:h-[44px] bg-[#ad1fea] rounded-[10px] text-[13px] md:text-sm text-[#f2f4fe] font-[700] hover:bg-[#c75af6] hover:cursor-pointer"
+          >
             Post Comment
           </button>
         </div>
