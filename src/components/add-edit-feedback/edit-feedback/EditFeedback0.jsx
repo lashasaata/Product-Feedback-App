@@ -13,9 +13,7 @@ import { MyContext } from "../../../App";
 import { useContext, useEffect } from "react";
 import React, { useCallback } from "react";
 import { useLocation } from "react-router-dom";
-import { useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+// import "react-toastify/dist/ReactToastify.css";
 
 export default function EditFeedback() {
   const { navigate, setData, data } = useContext(MyContext);
