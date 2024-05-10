@@ -7,7 +7,7 @@ import NewFeedback from "./Pages/NewFeedback";
 import EditFeedback from "./Pages/EditFeedback";
 import Roadmap from "./Pages/Roadmap";
 import { createContext, useState, useEffect } from "react";
-export const MyContext = createContext(null);
+export const MyContext = createContext({});
 
 function App() {
   const storedData = JSON.parse(localStorage.getItem("data"));

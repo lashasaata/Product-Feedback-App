@@ -128,7 +128,7 @@ export default function EditFeedback() {
             src="/assets/shared/icon-edit-feedback.svg"
             alt="plus icon"
           />
-          <h1 id="form-title">Create New Feedback</h1>
+          <h1 id="form-title">Editing '{currentFeedback.title}'</h1>
           <FeedbackTitle register={register} errors={errors} />
           <Category setValue={setValue} category={category} />
           <UpdateStatus setValue={setValue} />
