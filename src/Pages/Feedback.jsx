@@ -7,17 +7,11 @@ function Feedback() {
   const params = useParams();
   let productRequests = context.data.productRequests;
   const id = parseFloat(params.id);
-  // const map0 = new Map(Object.entries(context.data));
-  // const map1 = new Map(Object.entries(context.data.productRequests[id - 1]));
-  // const choosenClon = { ...feedback };
 
-  // console.log(context.data.productRequests);
   const user = context.data.currentUser;
   const feedback = context.data.productRequests.find(
     (feedback) => feedback.id === id
   );
-  // console.log(feedback);
-  // const [feedback, setFeedback] = useState(feedback0);
 
   let commentsAmout = 0;
   if (feedback.comments) {
@@ -193,6 +187,7 @@ function Feedback() {
       setUseReply(reply0());
       setReplyText("");
       setReplyValidation(false);
+      context.setData(context.data);
     }
   };
 

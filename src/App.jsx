@@ -11,7 +11,7 @@ export const MyContext = createContext(null);
 
 function App() {
   const storedData = JSON.parse(localStorage.getItem("data"));
-
+  console.log(storedData);
   const [data, setData] = useState(storedData || datajson);
 
   useEffect(() => {
@@ -27,7 +27,8 @@ function App() {
           data,
           setData,
           navigate,
-        }}>
+        }}
+      >
         <Routes>
           <Route path="/" element={<Navigate to={"/feedbacks"} />} />
           <Route path="/feedbacks" element={<Suggestions />} />
